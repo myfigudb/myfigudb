@@ -1,0 +1,31 @@
+{
+  "name": "myfigudb-backend",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "init:bf": "../node_modules/.bin/tsx src/scripts/init_bloom_filter.ts",
+    "dev:scraper": "../node_modules/.bin/tsx src/dev/scraper_index.ts",
+    "dev:crawler": "../node_modules/.bin/tsx src/dev/crawler_index.ts",
+    "dev:fuse": "../node_modules/.bin/tsx src/dev/fuse_index.ts",
+    "start": "../node_modules/.bin/tsx src/index.ts"
+  },
+  "keywords": [],
+  "author": "SolareDev",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "prisma": "^7.2.0",
+    "tsx": "^4.21.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.2.0",
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "fuse.js": "^7.1.0",
+    "npx": "^3.0.0",
+    "redis": "^5.10.0",
+    "zod": "^4.3.5"
+  }
+}
