@@ -1,5 +1,7 @@
-import { prisma } from "../config/prisma";
+import {prisma} from "../config/prisma.js";
+
 import { License, Prisma } from "@prisma/client";
+
 
 export class LicenseService {
 
@@ -11,6 +13,10 @@ export class LicenseService {
         return prisma.license.findUnique({
             where: { id }
         });
+    }
+
+    async getAllLicenses(): Promise<License[]> {
+        return prisma.license.findMany();
     }
 
     /**
@@ -54,7 +60,7 @@ export class LicenseService {
      * Find licenses with similar names using trigram similarity (PostgreSQL pg_trgm).
      *
      * IMPORTANT : We use strict SQL here, so we must use the database table name ("license"),
-     * defined in {@link ../../prisma/catalog.prisma catalog.prisma} via @@map("license")
+     * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("license")
      *
      * @param name          Name to search
      * @param threshold     Trigger threshold (default: 0.3)
@@ -64,7 +70,8 @@ export class LicenseService {
         return prisma.$queryRaw<License[]>`
             SELECT *
             FROM "license"
-            WHERE similarity(name, ${name}) > ${threshold} LIMIT ${limit};
+            WHERE similarity(name, ${name}) > ${threshold}
+            LIMIT ${limit};
         `;
     }
 }
