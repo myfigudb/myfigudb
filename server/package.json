@@ -11,7 +11,7 @@
     "start": "../node_modules/.bin/tsx src/index.ts"
   },
   "keywords": [],
-  "author": "SolareDev",
+  "author": "Solare",
   "license": "MIT",
   "description": "",
   "devDependencies": {
