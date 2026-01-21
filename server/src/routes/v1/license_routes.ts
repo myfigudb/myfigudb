@@ -10,6 +10,6 @@ const controller = new LicenseController();
 
 router.post('/', validate(licenseSchema), (req, res) => controller.create(req, res));
 router.get('/', (req, res) => controller.findAll(req, res));
-
+router.get('/', (req, res) => controller.findById(req, res));
 
 export default router;
