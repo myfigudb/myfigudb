@@ -1,0 +1,77 @@
+import {prisma} from "../config/prisma.js";
+
+import {Character, Prisma} from "../generated/prisma/client.js";
+
+
+export class CharacterService {
+
+    /**
+     * Retrieve a Character by its unique ID.
+     * @returns The Character or null if not found.
+     */
+    async getCharacterById(id: string): Promise<Character | null> {
+        return prisma.character.findUnique({
+            where: { id }
+        });
+    }
+
+    async getAllCharacters(): Promise<Character[]> {
+        return prisma.character.findMany();
+    }
+
+    /**
+     * Retrieve a Character by its unique Name.
+     * @returns The Character or null if not found.
+     */
+    async getCharacterByName(name: string): Promise<Character[] | null> {
+        return prisma.character.findMany({
+            where: { name }
+        });
+    }
+
+    async createCharacter(data: Prisma.CharacterCreateInput): Promise<Character> {
+        return prisma.character.create({
+            data: data
+        });
+    }
+
+    /**
+     * Update an existing Character.
+     * @throws {Prisma.PrismaClientKnownRequestError} If the ID does not exist.
+     */
+    async updateCharacter(id: string, data: Prisma.CharacterUpdateInput): Promise<Character> {
+        return prisma.character.update({
+            where: { id },
+            data: data
+        });
+    }
+
+    /**
+     * Delete a Character.
+     * @throws {Prisma.PrismaClientKnownRequestError} If the ID does not exist.
+     */
+    async deleteCharacter(id: string): Promise<Character> {
+        return prisma.character.delete({
+            where: { id }
+        });
+    }
+
+    /**
+     * Find Characters with similar names using trigram similarity (PostgreSQL pg_trgm).
+     *
+     * IMPORTANT : We use strict SQL here, so we must use the database table name ("Character"),
+     * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("Character")
+     *
+     * @param name          Name to search
+     * @param threshold     Trigger threshold (default: 0.3)
+     * @param limit         Number of results to return (default: 1)
+     */
+    async getCharacterBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Character[]> {
+        return prisma.$queryRaw<Character[]>`
+            SELECT *
+            FROM "character"
+            WHERE similarity(name, ${name}) > ${threshold}
+            LIMIT ${limit};
+        `;
+    }
+}
