@@ -1,6 +1,6 @@
 import {prisma} from "../config/prisma.js";
 
-import { License, Prisma } from "@prisma/client";
+import {License, Prisma} from "../generated/prisma/client.js";
 
 
 export class LicenseService {
