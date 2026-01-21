@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import {LicenseService} from "../services/LicenseService.js";
+import {tr} from "zod/v4/locales/index.js";
+import {licenseSchema} from "../interfaces/dtos/license_dto.js";
 
 const service = new LicenseService();
 
@@ -11,6 +13,41 @@ export class LicenseController {
             return res.status(201).json(license);
         } catch (error) {
             console.error("Error creating license:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    async delete(req: Request<{ id: string }>, res: Response) {
+        try {
+            const { id } = req.params;
+
+            const license = await service.deleteLicense(id);
+
+            if (!license) {
+                return res.status(404).json({ message: "License not found" });
+            }
+
+            return res.status(204).json(license);
+
+        } catch(error) {
+            console.error("Error deleting licence:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    async update(req: Request<{ id: string }>, res: Response) {
+        try {
+            const { id } = req.params;
+
+            const license = await service.updateLicense(id, req.body);
+
+            if (!license) {
+                return res.status(404).json({ message: "License not found" });
+            }
+
+            return res.status(200).json(license)
+        } catch(error) {
+            console.error("Error update licence:", error);
             return res.status(500).json({ message: "Internal server error" });
         }
     }
@@ -29,6 +66,24 @@ export class LicenseController {
 
         } catch(error) {
             console.error("Error getting license by id:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    async findByName(req: Request<{ name: string }>, res: Response) {
+        try {
+            const { name } = req.params;
+
+            const license = await service.getLicenseByName(name);
+
+            if (!license) {
+                return res.status(404).json({ message: "License not found" });
+            }
+
+            return res.status(200).json(license);
+
+        } catch(error) {
+            console.error("Error getting license by name:", error);
             return res.status(500).json({ message: "Internal server error" });
         }
     }
