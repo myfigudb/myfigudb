@@ -4,10 +4,23 @@ model License {
 
   //TODO images, desc, url ?
 
-  //characters Character[]
+  characters Character[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("license")
+}
+
+model Character {
+  id   String @id @default(uuid()) @db.Uuid
+  name String
+
+  license_id String? @db.Uuid
+
+  license License? @relation(fields: [license_id], references: [id])
+
+  //figures Figure[]
+
+  @@map("character")
 }
