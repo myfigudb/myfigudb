@@ -1,0 +1,12 @@
+{
+  "name": "myfigudb-global",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {},
+  "keywords": [],
+  "author": "Solare",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {},
+  "dependencies": {}
+}

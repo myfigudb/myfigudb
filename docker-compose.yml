@@ -1,0 +1,27 @@
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: mfdb-redis
+    restart: always
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - ./redis_data:/data
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: mfdb-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: mfdb_user
+      POSTGRES_PASSWORD: mfdb_password
+      POSTGRES_DB: mfdb_crawler
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+
+volumes:
+  redis_data:
+  pg_data:
