@@ -15,15 +15,22 @@ export class LicenseController {
         }
     }
 
-    async findById(req: Request, res: Response) {
-        try{
-            const license = await service.getLicenseById(req.body);
+    async findById(req: Request<{ id: string }>, res: Response) {
+        try {
+            const { id } = req.params;
+
+            const license = await service.getLicenseById(id);
+
+            if (!license) {
+                return res.status(404).json({ message: "License not found" });
+            }
+
             return res.status(200).json(license);
-        }catch(error){
-            console.error("Error getting all liscenses by id with error:", error);
+
+        } catch(error) {
+            console.error("Error getting license by id:", error);
             return res.status(500).json({ message: "Internal server error" });
         }
-
     }
 
     async findAll(req: Request, res: Response) {
