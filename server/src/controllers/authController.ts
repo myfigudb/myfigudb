@@ -6,7 +6,7 @@ const service = new AuthService();
 
 export class AuthController {
 
-    login: RequestHandler<AuthDTO> = async (req: Request, res: Response) => {
+    login: RequestHandler<{}, any, AuthDTO> = async (req, res) => {
         try {
             let access_token: string | null = null;
 
