@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import {LicenseService} from "../services/licenseService.js";
 import {tr} from "zod/v4/locales/index.js";
-import {licenseSchema} from "../interfaces/dtos/license_dto.js";
+import {licenseSchema} from "../interfaces/dtos/body/license_dto.js";
 
 const service = new LicenseService();
 

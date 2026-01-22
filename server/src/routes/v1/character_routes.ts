@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { validate } from '../../middlewares/validate.js';
 
-import {characterSchema} from "../../interfaces/dtos/character_dto.js";
+import {characterSchema} from "../../interfaces/dtos/body/character_dto.js";
 import {CharacterController} from "../../controllers/characterController.js";
 
-import {paramsIdSchema} from "../../interfaces/dtos/common.js";
+import {paramsIdSchema} from "../../interfaces/dtos/params/common.js";
 import {verifyToken} from "../../middlewares/auth.js";
 import {verifyRole} from "../../middlewares/role.js";
 
