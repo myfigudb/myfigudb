@@ -1,0 +1,12 @@
+model Media {
+  hash      String @id
+  mime_type String
+  extension String
+
+  characters Character[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("media")
+}
