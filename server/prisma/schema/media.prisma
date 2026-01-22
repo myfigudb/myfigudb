@@ -2,6 +2,7 @@ model Media {
   hash      String @id
   mime_type String
   extension String
+  folder    String @default("uploads")
 
   characters Character[]
 

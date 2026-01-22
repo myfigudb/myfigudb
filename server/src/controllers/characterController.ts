@@ -70,7 +70,7 @@ export class CharacterController {
             for (const file of files) {
                 const uploaded = await storage_service.uploadFile(file.buffer, file.mimetype, 'characters');
 
-                await media_service.ensureMediaExists(uploaded.hash, file.mimetype);
+                await media_service.ensureMediaExists(uploaded.hash, file.mimetype, 'characters');
                 media_hashes.push(uploaded.hash);
             }
 
