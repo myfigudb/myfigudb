@@ -2,7 +2,9 @@ import {Request, RequestHandler, Response} from 'express';
 import {CharacterService} from "../services/database/characterService.js";
 import {StorageService} from "../services/storageService.js";
 import {MediaService} from "../services/database/mediaService.js";
+
 import {ParamsIdDTO} from "../interfaces/dtos/params/common.js";
+import {CharacterDTO} from "../interfaces/dtos/body/character_dto.js";
 
 const service = new CharacterService();
 
@@ -11,7 +13,7 @@ const media_service = new MediaService();
 
 export class CharacterController {
 
-    async create(req: Request, res: Response) {
+    create: RequestHandler<{}, any, CharacterDTO> = async (req, res) => {
         try {
             const character = await service.createCharacter(req.body);
             return res.status(201).json(character);
@@ -21,7 +23,7 @@ export class CharacterController {
         }
     }
 
-    async findById(req: Request<{ id: string }>, res: Response) {
+    findById: RequestHandler<ParamsIdDTO> = async (req, res) => {
         try {
             const { id } = req.params;
 
@@ -39,7 +41,7 @@ export class CharacterController {
         }
     }
 
-    async findAll(req: Request, res: Response) {
+    findAll: RequestHandler = async (req, res) => {
         try {
             const character = await service.getAllCharacters();
             return res.status(200).json(character);

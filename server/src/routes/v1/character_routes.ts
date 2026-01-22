@@ -13,9 +13,22 @@ import {verifyRole} from "../../middlewares/role.js";
 const router = Router();
 const controller = new CharacterController();
 
-router.post('/', verifyToken, validate({body: characterSchema }), (req, res) => controller.create(req, res));
-router.get('/', verifyToken, verifyRole("default"), (req, res) => controller.findAll(req, res));
-router.get('/:id', validate({ params: paramsIdSchema }), controller.findById);
+router.post('/',
+    verifyToken,
+    validate({body: characterSchema }),
+    controller.create
+);
+
+router.get('/',
+    verifyToken,
+    verifyRole("default"),
+     controller.findAll
+);
+
+router.get('/:id',
+    validate({ params: paramsIdSchema }),
+    controller.findById
+);
 
 router.post('/:id/medias',
     verifyToken,
