@@ -1,11 +1,12 @@
-import { Request, Response } from 'express';
+import {Request, RequestHandler, Response} from 'express';
 import {AuthService} from "../services/database/authService.js";
+import {AuthDTO} from "../interfaces/dtos/body/auth_dto.js";
 
 const service = new AuthService();
 
 export class AuthController {
 
-    async login(req: Request, res: Response) {
+    login: RequestHandler<AuthDTO> = async (req: Request, res: Response) => {
         try {
             let access_token: string | null = null;
 
