@@ -1,13 +1,14 @@
-import { Request, Response } from 'express';
+import {Request, RequestHandler, Response} from 'express';
 import {LicenseService} from "../services/database/licenseService.js";
 import {tr} from "zod/v4/locales/index.js";
-import {licenseSchema} from "../interfaces/dtos/body/license_dto.js";
+import {LicenseDTO, licenseSchema} from "../interfaces/dtos/body/license_dto.js";
+import {ParamsIdDTO, ParamsNameDTO} from "../interfaces/dtos/params/common.js";
 
 const service = new LicenseService();
 
 export class LicenseController {
 
-    async create(req: Request, res: Response) {
+    create: RequestHandler<{}, any, LicenseDTO> = async (req, res) => {
         try {
             const license = await service.createLicense(req.body);
             return res.status(201).json(license);
@@ -17,7 +18,7 @@ export class LicenseController {
         }
     }
 
-    async delete(req: Request<{ id: string }>, res: Response) {
+    delete: RequestHandler<ParamsIdDTO> = async (req, res) => {
         try {
             const { id } = req.params;
 
@@ -35,7 +36,7 @@ export class LicenseController {
         }
     }
 
-    async update(req: Request<{ id: string }>, res: Response) {
+    update: RequestHandler<ParamsIdDTO, any, LicenseDTO> = async (req, res) => {
         try {
             const { id } = req.params;
 
@@ -52,7 +53,7 @@ export class LicenseController {
         }
     }
 
-    async findById(req: Request<{ id: string }>, res: Response) {
+    findById: RequestHandler<ParamsIdDTO> = async (req, res) => {
         try {
             const { id } = req.params;
 
@@ -70,7 +71,7 @@ export class LicenseController {
         }
     }
 
-    async findByName(req: Request<{ name: string }>, res: Response) {
+    findByName: RequestHandler<ParamsNameDTO> = async (req, res) => {
         try {
             const { name } = req.params;
 
@@ -88,7 +89,7 @@ export class LicenseController {
         }
     }
 
-    async findAll(req: Request, res: Response) {
+    findAll: RequestHandler = async (req, res) => {
         try {
             const licenses = await service.getAllLicenses();
             return res.status(200).json(licenses);
