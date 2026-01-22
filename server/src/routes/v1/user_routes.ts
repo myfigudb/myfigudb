@@ -7,6 +7,9 @@ import {UserController} from "../../controllers/userController.js";
 const router = Router();
 const controller = new UserController();
 
-router.post('/', validate({body: userCreateSchema }), (req, res) => controller.create(req, res));
+router.post('/',
+    validate({body: userCreateSchema }),
+    controller.create
+);
 
 export default router;
