@@ -7,7 +7,7 @@ services:
       - "6379:6379"
       - "8001:8001"
     volumes:
-      - ./redis_data:/data
+      - redis_data:/data
 
   postgres:
     image: postgres:15-alpine
@@ -16,12 +16,27 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: mfdb_user
-      POSTGRES_PASSWORD: mfdb_password
-      POSTGRES_DB: mfdb_crawler
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - ./pg_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    container_name: minio_server
+    ports:
+      - "9000:9000" # API S3
+      - "9001:9001" # Console Web (UI)
+    environment:
+      MINIO_ROOT_USER: ${S3_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${S3_ROOT_PASSWORD}
+      MINIO_REGION_NAME: ${S3_REGION}
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
 
 volumes:
   redis_data:
   pg_data:
+  minio_data:
