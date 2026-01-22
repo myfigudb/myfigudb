@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {LicenseService} from "../services/licenseService.js";
+import {LicenseService} from "../services/database/licenseService.js";
 import {tr} from "zod/v4/locales/index.js";
 import {licenseSchema} from "../interfaces/dtos/body/license_dto.js";
 

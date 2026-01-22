@@ -1,6 +1,6 @@
-import {pclient} from "../config/prisma.js";
+import {pclient} from "../../config/prisma.js";
 
-import {Character, Prisma} from "../generated/prisma/client.js";
+import {Character, Prisma} from "../../generated/prisma/client.js";
 
 
 export class CharacterService {
@@ -57,6 +57,19 @@ export class CharacterService {
     }
 
     /**
+     * Check if a Character exists by its ID.
+     *
+     * NOTE: To use with parsimony to prevent double queries.
+     * @param id
+     */
+    async existsCharacter(id: string): Promise<boolean> {
+        const count = await pclient.character.count({
+            where: { id }
+        });
+        return count > 0;
+    }
+
+    /**
      * Find Characters with similar names using trigram similarity (PostgreSQL pg_trgm).
      *
      * IMPORTANT : We use strict SQL here, so we must use the database table name ("Character"),
@@ -73,5 +86,19 @@ export class CharacterService {
             WHERE similarity(name, ${name}) > ${threshold}
             LIMIT ${limit};
         `;
+    }
+
+    async attachMedias(id: string, media_hashes: string[]): Promise<Character> {
+        return pclient.character.update({
+            where: { id },
+            data: {
+                medias: {
+                    connect: media_hashes.map(hash => ({ hash }))
+                }
+            },
+            include: {
+                medias: true
+            }
+        });
     }
 }

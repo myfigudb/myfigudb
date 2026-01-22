@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {UserService} from "../services/userService.js";
+import {UserService} from "../services/database/userService.js";
 
 const service = new UserService();
 

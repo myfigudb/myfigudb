@@ -1,5 +1,5 @@
-import {Prisma, User} from "../generated/prisma/client.js";
-import {pclient} from "../config/prisma.js";
+import {Prisma, User} from "../../generated/prisma/client.js";
+import {pclient} from "../../config/prisma.js";
 import bcrypt from "bcrypt";
 
 
