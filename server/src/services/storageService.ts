@@ -88,7 +88,7 @@ export class StorageService {
             return {
                 file_key: file_key,
                 hash: hash,
-                public_url: this.getPublicUrl(file_key)
+                public_url: StorageService.getPublicUrl(hash, file_extension, folder)
             }
         }
 
@@ -106,7 +106,7 @@ export class StorageService {
             return {
                 file_key: file_key,
                 hash: hash,
-                public_url: this.getPublicUrl(file_key)
+                public_url: StorageService.getPublicUrl(hash, file_extension, folder)
             }
 
         } catch (error) {
@@ -127,7 +127,10 @@ export class StorageService {
         }
     }
 
-    getPublicUrl(file_key: string): string {
-        return `${process.env.S3_ENDPOINT}/${BUCKET_NAME}/${file_key}`;
+    static getPublicUrl(hash: string, file_extension: string, folder: string = 'uploads'): string {
+        const endpoint = process.env.S3_ENDPOINT || 'http://localhost:9000';
+        const bucket = process.env.S3_BUCKET_NAME || 'mfdb-bucket';
+
+        return `${endpoint}/${bucket}/${folder}/${hash}.${file_extension}`;
     }
 }
