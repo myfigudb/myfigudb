@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {CharacterService} from "../services/CharacterService.js";
+import {CharacterService} from "../services/characterService.js";
 
 const service = new CharacterService();
 

@@ -1,4 +1,4 @@
-import {prisma} from "../config/prisma.js";
+import {pclient} from "../config/prisma.js";
 
 import {License, Prisma} from "../generated/prisma/client.js";
 
@@ -10,13 +10,13 @@ export class LicenseService {
      * @returns The license or null if not found.
      */
     async getLicenseById(id: string): Promise<License | null> {
-        return prisma.license.findUnique({
+        return pclient.license.findUnique({
             where: { id }
         });
     }
 
     async getAllLicenses(): Promise<License[]> {
-        return prisma.license.findMany();
+        return pclient.license.findMany();
     }
 
     /**
@@ -24,13 +24,13 @@ export class LicenseService {
      * @returns The license or null if not found.
      */
     async getLicenseByName(name: string): Promise<License | null> {
-        return prisma.license.findUnique({
+        return pclient.license.findUnique({
             where: { name }
         });
     }
 
     async createLicense(data: Prisma.LicenseCreateInput): Promise<License> {
-        return prisma.license.create({
+        return pclient.license.create({
             data: data
         });
     }
@@ -40,7 +40,7 @@ export class LicenseService {
      * @throws {Prisma.PrismaClientKnownRequestError} If the ID does not exist.
      */
     async updateLicense(id: string, data: Prisma.LicenseUpdateInput): Promise<License> {
-        return prisma.license.update({
+        return pclient.license.update({
             where: { id },
             data: data
         });
@@ -51,7 +51,7 @@ export class LicenseService {
      * @throws {Prisma.PrismaClientKnownRequestError} If the ID does not exist.
      */
     async deleteLicense(id: string): Promise<License> {
-        return prisma.license.delete({
+        return pclient.license.delete({
             where: { id }
         });
     }
@@ -67,7 +67,7 @@ export class LicenseService {
      * @param limit         Number of results to return (default: 1)
      */
     async getLicenseBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<License[]> {
-        return prisma.$queryRaw<License[]>`
+        return pclient.$queryRaw<License[]>`
             SELECT *
             FROM "license"
             WHERE similarity(name, ${name}) > ${threshold}

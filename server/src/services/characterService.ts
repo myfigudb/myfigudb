@@ -1,4 +1,4 @@
-import {prisma} from "../config/prisma.js";
+import {pclient} from "../config/prisma.js";
 
 import {Character, Prisma} from "../generated/prisma/client.js";
 
@@ -10,13 +10,13 @@ export class CharacterService {
      * @returns The Character or null if not found.
      */
     async getCharacterById(id: string): Promise<Character | null> {
-        return prisma.character.findUnique({
+        return pclient.character.findUnique({
             where: { id }
         });
     }
 
     async getAllCharacters(): Promise<Character[]> {
-        return prisma.character.findMany();
+        return pclient.character.findMany();
     }
 
     /**
@@ -24,13 +24,13 @@ export class CharacterService {
      * @returns The Character or null if not found.
      */
     async getCharacterByName(name: string): Promise<Character[] | null> {
-        return prisma.character.findMany({
+        return pclient.character.findMany({
             where: { name }
         });
     }
 
     async createCharacter(data: Prisma.CharacterCreateInput): Promise<Character> {
-        return prisma.character.create({
+        return pclient.character.create({
             data: data
         });
     }
@@ -40,7 +40,7 @@ export class CharacterService {
      * @throws {Prisma.PrismaClientKnownRequestError} If the ID does not exist.
      */
     async updateCharacter(id: string, data: Prisma.CharacterUpdateInput): Promise<Character> {
-        return prisma.character.update({
+        return pclient.character.update({
             where: { id },
             data: data
         });
@@ -51,7 +51,7 @@ export class CharacterService {
      * @throws {Prisma.PrismaClientKnownRequestError} If the ID does not exist.
      */
     async deleteCharacter(id: string): Promise<Character> {
-        return prisma.character.delete({
+        return pclient.character.delete({
             where: { id }
         });
     }
@@ -67,7 +67,7 @@ export class CharacterService {
      * @param limit         Number of results to return (default: 1)
      */
     async getCharacterBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Character[]> {
-        return prisma.$queryRaw<Character[]>`
+        return pclient.$queryRaw<Character[]>`
             SELECT *
             FROM "character"
             WHERE similarity(name, ${name}) > ${threshold}
