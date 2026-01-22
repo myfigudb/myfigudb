@@ -5,4 +5,4 @@ export const characterSchema = z.object({
     license_id: z.uuid(),
 })
 
-export type LicenseDTO = z.infer<typeof characterSchema>;
+export type CharacterDTO = z.infer<typeof characterSchema>;

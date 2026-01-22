@@ -6,4 +6,5 @@ export const userCreateSchema = z.object({
 
     password: z.string().min(8, "Password must be at least 8 characters long"),
 })
+export type UserCreateDTO = z.infer<typeof userCreateSchema>;
 

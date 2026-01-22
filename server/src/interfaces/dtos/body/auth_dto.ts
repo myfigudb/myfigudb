@@ -12,3 +12,4 @@ export const authSchema = z.object({
         path: ["email"],
     });
 
+export type AuthDTO = z.infer<typeof authSchema>;

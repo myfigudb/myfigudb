@@ -2,7 +2,7 @@ import {Request, RequestHandler, Response} from 'express';
 import {CharacterService} from "../services/database/characterService.js";
 import {StorageService} from "../services/storageService.js";
 import {MediaService} from "../services/database/mediaService.js";
-import {ParamsId} from "../interfaces/dtos/params/common.js";
+import {ParamsIdDTO} from "../interfaces/dtos/params/common.js";
 
 const service = new CharacterService();
 
@@ -49,7 +49,7 @@ export class CharacterController {
         }
     }
 
-    uploadMedias: RequestHandler<ParamsId> = async (req, res, next) => {
+    uploadMedias: RequestHandler<ParamsIdDTO> = async (req, res, next) => {
         try {
             // 1. Character ID
             const { id } = req.params;
