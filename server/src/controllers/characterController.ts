@@ -20,9 +20,36 @@ export class CharacterController {
     create: RequestHandler<{}, any, CreateCharacterDTO> = async (req, res) => {
         try {
             const character = await service.createCharacter(req.body);
-            return res.status(201).json(character);
+            return res.status(201).json(toCharacterDTO(character as CharacterInput));
         } catch (error) {
             console.error("Error creating characters:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    update: RequestHandler<ParamsIdDTO, any, CreateCharacterDTO> = async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            const character = await service.updateCharacter(id, req.body);
+
+            return res.status(200).json(toCharacterDTO(character as CharacterInput));
+        } catch(error) {
+            console.error("Error update character:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    delete: RequestHandler<ParamsIdDTO> = async (req, res) => {
+        try {
+            const { id } = req.params;
+
+            await service.deleteCharacter(id);
+
+            return res.status(204).send();
+
+        } catch(error) {
+            console.error("Error deleting character:", error);
             return res.status(500).json({ message: "Internal server error" });
         }
     }
@@ -48,8 +75,10 @@ export class CharacterController {
 
     findAll: RequestHandler = async (req, res) => {
         try {
-            const character = await service.getAllCharacters();
-            return res.status(200).json(character);
+            const characters = await service.getAllCharacters();
+            // On mappe le résultat pour appliquer le DTO si nécessaire, sinon on renvoie brut
+            const response_data = characters.map(c => toCharacterDTO(c as CharacterInput));
+            return res.status(200).json(response_data);
         } catch (error) {
             console.error("Error getting all character with error:", error);
             return res.status(500).json({ message: "Internal server error" });
@@ -83,7 +112,7 @@ export class CharacterController {
 
             const updated_character = await service.attachMedias(id, media_hashes);
 
-            return res.status(200).json(updated_character);
+            return res.status(200).json(toCharacterDTO(updated_character as CharacterInput));
 
         } catch (error) {
             console.error("Error uploading character medias:", error);

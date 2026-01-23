@@ -9,6 +9,7 @@ import {CharacterController} from "../../controllers/characterController.js";
 import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
 import {verifyToken} from "../../middlewares/auth.js";
 import {verifyRole} from "../../middlewares/role.js";
+import {createLicenseSchema} from "../../interfaces/dtos/entities/license_dto.js";
 
 const router = Router();
 const controller = new CharacterController();
@@ -17,6 +18,16 @@ router.post('/',
     verifyToken,
     validate({body: createCharacterSchema }),
     controller.create
+);
+
+router.delete('/:id',
+    validate({ params: paramsIdSchema }),
+    controller.delete
+);
+
+router.patch('/:id',
+    validate({ params: paramsIdSchema, body: createCharacterSchema }),
+    controller.update
 );
 
 router.get('/',
@@ -37,5 +48,6 @@ router.post('/:id/medias',
     upload.array('images', 10),
     controller.uploadMedias
 );
+
 
 export default router;
