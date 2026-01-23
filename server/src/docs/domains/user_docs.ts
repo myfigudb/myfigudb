@@ -16,6 +16,7 @@ userRegistry.register('CreateUserInput', createUserSchema);
 
 
 userRegistry.registerPath({
+    tags: ['Users'],
     method: 'get',
     path: '/users/{id}',
     summary: 'Get user by ID',
@@ -36,6 +37,7 @@ userRegistry.registerPath({
 });
 
 userRegistry.registerPath({
+    tags: ['Users'],
     method: 'get',
     path: '/users',
     summary: 'Get all users',
@@ -51,6 +53,7 @@ userRegistry.registerPath({
 });
 
 userRegistry.registerPath({
+    tags: ['Users'],
     method: 'post',
     path: '/users',
     summary: 'Create a user',
@@ -71,6 +74,7 @@ userRegistry.registerPath({
 
 
 userRegistry.registerPath({
+    tags: ['Users'],
     method: 'patch',
     path: '/users/{id}',
     summary: 'Update a user',
@@ -94,6 +98,7 @@ userRegistry.registerPath({
 });
 
 userRegistry.registerPath({
+    tags: ['Users'],
     method: 'delete',
     path: '/users/{id}',
     summary: 'Delete a user',

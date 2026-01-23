@@ -18,6 +18,7 @@ licenseRegistry.register('CreateLicenseInput', createLicenseSchema);
 
 
 licenseRegistry.registerPath({
+    tags: ['License'],
     method: 'get',
     path: '/licenses/{id}',
     summary: 'Get license data',
@@ -35,6 +36,7 @@ licenseRegistry.registerPath({
 });
 
 licenseRegistry.registerPath({
+    tags: ['License'],
     method: 'get',
     path: '/licenses',
     summary: 'Get all licenses data',
@@ -52,6 +54,7 @@ licenseRegistry.registerPath({
 });
 
 licenseRegistry.registerPath({
+    tags: ['License'],
     method: 'get',
     path: '/licenses/search/{name}',
     summary: 'Get license data using name search',
@@ -69,6 +72,7 @@ licenseRegistry.registerPath({
 });
 
 licenseRegistry.registerPath({
+    tags: ['License'],
     method: 'delete',
     path: '/licenses/{id}',
     summary: 'Delete a license',
@@ -87,6 +91,7 @@ licenseRegistry.registerPath({
 
 
 licenseRegistry.registerPath({
+    tags: ['License'],
     method: 'post',
     path: '/licenses',
     summary: 'Create a license',
@@ -106,6 +111,7 @@ licenseRegistry.registerPath({
 });
 
 licenseRegistry.registerPath({
+    tags: ['License'],
     method: 'patch',
     path: '/licenses',
     summary: 'Update a license',

@@ -17,6 +17,7 @@ characterRegistry.register('CreateCharacterInput', createCharacterSchema);
 
 
 characterRegistry.registerPath({
+    tags: ['Character'],
     method: 'get',
     path: '/characters/{id}',
     summary: 'Get character data (includes media URLs)',
@@ -37,6 +38,7 @@ characterRegistry.registerPath({
 });
 
 characterRegistry.registerPath({
+    tags: ['Character'],
     method: 'get',
     path: '/characters',
     summary: 'Get all characters data (includes media URLs)',
@@ -54,6 +56,7 @@ characterRegistry.registerPath({
 });
 
 characterRegistry.registerPath({
+    tags: ['Character'],
     method: 'post',
     path: '/characters',
     summary: 'Create a character',
@@ -73,6 +76,7 @@ characterRegistry.registerPath({
 });
 
 characterRegistry.registerPath({
+    tags: ['Character'],
     method: 'patch',
     path: '/characters/{id}',
     summary: 'Update a character',
@@ -97,6 +101,7 @@ characterRegistry.registerPath({
 
 
 characterRegistry.registerPath({
+    tags: ['Character'],
     method: 'delete',
     path: '/characters/{id}',
     summary: 'Delete a character',
@@ -115,6 +120,7 @@ characterRegistry.registerPath({
 
 //TODO DTO FILE MEDIA
 characterRegistry.registerPath({
+    tags: ['Character'],
     method: 'post',
     path: '/characters/{id}/medias',
     summary: 'Add medias to a character',
