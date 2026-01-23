@@ -11,7 +11,10 @@ export class CharacterService {
      */
     async getCharacterById(id: string): Promise<Character | null> {
         return pclient.character.findUnique({
-            where: { id }
+            where: { id },
+            include : {
+                medias: true
+            }
         });
     }
 
@@ -25,11 +28,14 @@ export class CharacterService {
      */
     async getCharacterByName(name: string): Promise<Character[] | null> {
         return pclient.character.findMany({
-            where: { name }
+            where: { name },
+            include : {
+                medias: true
+            }
         });
     }
 
-    async createCharacter(data: Prisma.CharacterCreateInput): Promise<Character> {
+    async createCharacter(data: Prisma.CharacterUncheckedCreateInput): Promise<Character> {
         return pclient.character.create({
             data: data
         });
@@ -42,7 +48,10 @@ export class CharacterService {
     async updateCharacter(id: string, data: Prisma.CharacterUpdateInput): Promise<Character> {
         return pclient.character.update({
             where: { id },
-            data: data
+            data: data,
+            include : {
+                medias: true
+            }
         });
     }
 

@@ -1,5 +1,8 @@
 import {z} from "zod";
 
+import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
+extendZodWithOpenApi(z)
+
 export const authSchema = z.object({
     password: z.string().min(1, "Password is required"),
 

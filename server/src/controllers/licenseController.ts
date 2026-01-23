@@ -1,14 +1,14 @@
 import {Request, RequestHandler, Response} from 'express';
 import {LicenseService} from "../services/database/licenseService.js";
 import {tr} from "zod/v4/locales/index.js";
-import {LicenseDTO, licenseSchema} from "../interfaces/dtos/body/license_dto.js";
-import {ParamsIdDTO, ParamsNameDTO} from "../interfaces/dtos/params/common.js";
+import {CreateLicenseDTO, createLicenseSchema} from "../interfaces/dtos/entities/license_dto.js";
+import {ParamsIdDTO, ParamsNameDTO} from "../interfaces/dtos/params_dto.js";
 
 const service = new LicenseService();
 
 export class LicenseController {
 
-    create: RequestHandler<{}, any, LicenseDTO> = async (req, res) => {
+    create: RequestHandler<{}, any, CreateLicenseDTO> = async (req, res) => {
         try {
             const license = await service.createLicense(req.body);
             return res.status(201).json(license);
@@ -36,7 +36,7 @@ export class LicenseController {
         }
     }
 
-    update: RequestHandler<ParamsIdDTO, any, LicenseDTO> = async (req, res) => {
+    update: RequestHandler<ParamsIdDTO, any, CreateLicenseDTO> = async (req, res) => {
         try {
             const { id } = req.params;
 

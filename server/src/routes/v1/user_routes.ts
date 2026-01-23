@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { validate } from '../../middlewares/validate.js';
 
-import {userCreateSchema} from "../../interfaces/dtos/body/user_dto.js";
+import {createUserSchema} from "../../interfaces/dtos/entities/user_dto.js";
 import {UserController} from "../../controllers/userController.js";
 
 const router = Router();
 const controller = new UserController();
 
 router.post('/',
-    validate({body: userCreateSchema }),
+    validate({body: createUserSchema }),
     controller.create
 );
 

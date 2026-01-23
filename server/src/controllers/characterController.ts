@@ -3,8 +3,8 @@ import {CharacterService} from "../services/database/characterService.js";
 import {StorageService} from "../services/storageService.js";
 import {MediaService} from "../services/database/mediaService.js";
 
-import {ParamsIdDTO} from "../interfaces/dtos/params/common.js";
-import {CharacterDTO} from "../interfaces/dtos/body/character_dto.js";
+import {ParamsIdDTO} from "../interfaces/dtos/params_dto.js";
+import toCharacterDTO, {CharacterInput, CreateCharacterDTO} from "../interfaces/dtos/entities/character_dto.js";
 
 const service = new CharacterService();
 
@@ -13,7 +13,7 @@ const media_service = new MediaService();
 
 export class CharacterController {
 
-    create: RequestHandler<{}, any, CharacterDTO> = async (req, res) => {
+    create: RequestHandler<{}, any, CreateCharacterDTO> = async (req, res) => {
         try {
             const character = await service.createCharacter(req.body);
             return res.status(201).json(character);
@@ -33,7 +33,8 @@ export class CharacterController {
                 return res.status(404).json({ message: "Character not found" });
             }
 
-            return res.status(200).json(character);
+            const response_data = toCharacterDTO(character as CharacterInput);
+            return res.status(200).json(response_data);
 
         } catch(error) {
             console.error("Error getting character by id:", error);

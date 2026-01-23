@@ -3,10 +3,10 @@ import { Router } from 'express';
 import { validate } from '../../middlewares/validate.js';
 import { upload } from '../../middlewares/upload.js';
 
-import {characterSchema} from "../../interfaces/dtos/body/character_dto.js";
+import {createCharacterSchema} from "../../interfaces/dtos/entities/character_dto.js";
 import {CharacterController} from "../../controllers/characterController.js";
 
-import {paramsIdSchema} from "../../interfaces/dtos/params/common.js";
+import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
 import {verifyToken} from "../../middlewares/auth.js";
 import {verifyRole} from "../../middlewares/role.js";
 
@@ -15,7 +15,7 @@ const controller = new CharacterController();
 
 router.post('/',
     verifyToken,
-    validate({body: characterSchema }),
+    validate({body: createCharacterSchema }),
     controller.create
 );
 

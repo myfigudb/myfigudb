@@ -1,0 +1,20 @@
+import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
+
+import { characterRegistry } from './domains/character_docs.js';
+
+export const generateOpenApiDocs = () => {
+    const generator = new OpenApiGeneratorV3([
+        ...characterRegistry.definitions,
+    ]);
+
+    return generator.generateDocument({
+        openapi: '3.0.0',
+        info: {
+            version: '0.0.1',
+            title: 'MFDB API',
+            description: 'REST Documentation',
+        },
+        servers: [{ url: '/api/v1' }],
+    });
+};
+
