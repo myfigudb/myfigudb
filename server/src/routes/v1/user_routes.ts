@@ -3,6 +3,7 @@ import { validate } from '../../middlewares/validate.js';
 
 import {createUserSchema} from "../../interfaces/dtos/entities/user_dto.js";
 import {UserController} from "../../controllers/userController.js";
+import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
 
 const router = Router();
 const controller = new UserController();
@@ -10,6 +11,11 @@ const controller = new UserController();
 router.post('/',
     validate({body: createUserSchema }),
     controller.create
+);
+
+router.get('/:id',
+    validate({ params: paramsIdSchema }),
+    controller.findById
 );
 
 export default router;
