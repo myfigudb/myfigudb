@@ -16,7 +16,6 @@ characterRegistry.register('CharacterResponse', characterResponseSchema);
 characterRegistry.register('CreateCharacterInput', createCharacterSchema);
 
 
-
 characterRegistry.registerPath({
     method: 'get',
     path: '/characters/{id}',
@@ -26,11 +25,14 @@ characterRegistry.registerPath({
     },
     responses: {
         200: {
-            description: 'Character',
+            description: 'Character found',
             content: {
                 'application/json': { schema: characterResponseSchema },
             },
         },
+        404: {
+            description: 'Character not found',
+        }
     },
 });
 
@@ -39,18 +41,17 @@ characterRegistry.registerPath({
     path: '/characters',
     summary: 'Get all characters data (includes media URLs)',
     request: {
-        params: paramsIdSchema,
+
     },
     responses: {
         200: {
-            description: 'Character',
+            description: 'List of Characters',
             content: {
                 'application/json': { schema: z.array(characterResponseSchema) },
             },
         },
     },
 });
-
 
 characterRegistry.registerPath({
     method: 'post',
@@ -68,6 +69,47 @@ characterRegistry.registerPath({
                 'application/json': { schema: characterResponseSchema },
             },
         },
+    },
+});
+
+characterRegistry.registerPath({
+    method: 'patch',
+    path: '/characters/{id}',
+    summary: 'Update a character',
+    request: {
+        params: paramsIdSchema,
+        body: {
+            content: { 'application/json': { schema: createCharacterSchema } },
+        },
+    },
+    responses: {
+        200: {
+            description: 'Updated with success',
+            content: {
+                'application/json': { schema: characterResponseSchema },
+            },
+        },
+        404: {
+            description: 'Character not found',
+        }
+    },
+});
+
+
+characterRegistry.registerPath({
+    method: 'delete',
+    path: '/characters/{id}',
+    summary: 'Delete a character',
+    request: {
+        params: paramsIdSchema,
+    },
+    responses: {
+        204: {
+            description: 'Deleted with success',
+        },
+        404: {
+            description: 'Character not found',
+        }
     },
 });
 
