@@ -37,7 +37,7 @@ export type CharacterResponse = z.infer<typeof characterResponseSchema>;
  */
 export type CharacterInput = Character & { medias: Media[] };
 
-const toCharacterDTO = (source: CharacterInput): CharacterResponse => {
+export const toCharacterDTO = (source: CharacterInput): CharacterResponse => {
     return {
         id: source.id,
         name: source.name,
@@ -48,5 +48,3 @@ const toCharacterDTO = (source: CharacterInput): CharacterResponse => {
         ),
     };
 };
-
-export default toCharacterDTO

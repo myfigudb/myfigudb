@@ -1,10 +1,12 @@
 import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 
 import { characterRegistry } from './domains/character_docs.js';
+import {licenseRegistry} from "./domains/license_docs.js";
 
 export const generateOpenApiDocs = () => {
     const generator = new OpenApiGeneratorV3([
         ...characterRegistry.definitions,
+        ...licenseRegistry.definitions,
     ]);
 
     return generator.generateDocument({

@@ -2,6 +2,7 @@ import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 
 import {characterResponseSchema, createCharacterSchema} from "../../interfaces/dtos/entities/character_dto.js";
 import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
+import {z} from "zod";
 
 export const characterRegistry = new OpenAPIRegistry();
 
@@ -34,6 +35,24 @@ characterRegistry.registerPath({
 });
 
 characterRegistry.registerPath({
+    method: 'get',
+    path: '/characters',
+    summary: 'Get all characters data (includes media URLs)',
+    request: {
+        params: paramsIdSchema,
+    },
+    responses: {
+        200: {
+            description: 'Character',
+            content: {
+                'application/json': { schema: z.array(characterResponseSchema) },
+            },
+        },
+    },
+});
+
+
+characterRegistry.registerPath({
     method: 'post',
     path: '/characters',
     summary: 'Create a character',
@@ -45,6 +64,24 @@ characterRegistry.registerPath({
     responses: {
         201: {
             description: 'Created with success',
+            content: {
+                'application/json': { schema: characterResponseSchema },
+            },
+        },
+    },
+});
+
+//TODO DTO FILE MEDIA
+characterRegistry.registerPath({
+    method: 'post',
+    path: '/characters/{id}/medias',
+    summary: 'Add medias to a character',
+    request: {
+        params: paramsIdSchema,
+    },
+    responses: {
+        200: {
+            description: 'Added with success',
             content: {
                 'application/json': { schema: characterResponseSchema },
             },

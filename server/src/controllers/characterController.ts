@@ -4,7 +4,11 @@ import {StorageService} from "../services/storageService.js";
 import {MediaService} from "../services/database/mediaService.js";
 
 import {ParamsIdDTO} from "../interfaces/dtos/params_dto.js";
-import toCharacterDTO, {CharacterInput, CreateCharacterDTO} from "../interfaces/dtos/entities/character_dto.js";
+import {
+    CharacterInput,
+    CreateCharacterDTO,
+    toCharacterDTO
+} from "../interfaces/dtos/entities/character_dto.js";
 
 const service = new CharacterService();
 
