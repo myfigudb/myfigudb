@@ -16,8 +16,9 @@ const base_client = new PrismaClient({
     adapter,
 });
 
+export const pclient = base_client;
 
-
+/*
 export const pclient = base_client.$extends({
     result: {
         media: {
@@ -30,4 +31,4 @@ export const pclient = base_client.$extends({
         },
     },
 });
-
+*/
