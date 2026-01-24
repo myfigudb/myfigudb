@@ -6,7 +6,7 @@ export class QueueService {
     /**
      * Tries to add a URL to the queue.
      */
-    static async enqueue(url: string): Promise<boolean> {
+    async enqueue(url: string): Promise<boolean> {
         const key = 'crawling:visited';
 
         try {
@@ -33,7 +33,7 @@ export class QueueService {
     /**
      * Fetch the next PENDING job and lock it to PROCESSING
      */
-    static async dequeue() {
+     async dequeue() {
         const job = await pclient.urlQueue.findFirst({
             where: { status: 'PENDING' },
             orderBy: { id: 'asc' }
@@ -53,7 +53,7 @@ export class QueueService {
     /**
      * Mark job as DONE
      */
-    static async completeJob(id: number) {
+    async completeJob(id: number) {
         await pclient.urlQueue.update({
             where: { id },
             data: { status: 'DONE', error: null }
@@ -63,7 +63,7 @@ export class QueueService {
     /**
      * Mark job as FAILED
      */
-    static async failJob(id: number, error_message: string) {
+    async failJob(id: number, error_message: string) {
         await pclient.urlQueue.update({
             where: { id },
             data: { status: 'FAILED', error: error_message }
