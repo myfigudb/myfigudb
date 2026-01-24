@@ -53,7 +53,7 @@ export class RangeService {
      * Create a new Range.
      * Data must include editor_id or connection to Editor.
      */
-    async createRange(data: Prisma.RangeCreateInput): Promise<Range> {
+    async createRange(data: Prisma.RangeUncheckedCreateInput): Promise<Range> {
         return pclient.range.create({
             data: data
         });
@@ -95,12 +95,12 @@ export class RangeService {
 
     /**
      * Find Ranges with similar names using trigram similarity.
-     * IMPORTANT: Table name is "series" due to @@map("series")
+     * IMPORTANT: Table name is "range" due to @@map("range")
      */
     async getRangeBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Range[]> {
         return pclient.$queryRaw<Range[]>`
             SELECT *
-            FROM "series"
+            FROM "range"
             WHERE similarity(name, ${name}) > ${threshold}
             ORDER BY similarity(name, ${name}) DESC
             LIMIT ${limit};
