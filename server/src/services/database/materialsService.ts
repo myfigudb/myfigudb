@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Material, Prisma} from "../../generated/prisma/client.js";
+import {License, Material, Prisma} from "../../generated/prisma/client.js";
 
 export class MaterialService {
 
@@ -45,5 +45,14 @@ export class MaterialService {
         return pclient.material.delete({
             where: { name }
         });
+    }
+
+    async getMaterialBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Material[]> {
+        return pclient.$queryRaw<Material[]>`
+            SELECT *
+            FROM "materials"
+            WHERE similarity(name, ${name}) > ${threshold}
+            LIMIT ${limit};
+        `;
     }
 }
