@@ -1,28 +1,71 @@
-model License {
-  id   String @id @default(uuid()) @db.Uuid
-  name String @unique
+model Tag {
+  id    String @id @default(uuid()) @db.Uuid
+  label String @unique
 
-  //TODO images, desc, url ?
+  figures Figure[]
 
-  characters Character[]
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@map("license")
+  @@map("tag")
 }
 
-model Character {
+model Reseller {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique
+  url  String
+
+  listings FigureListing[]
+
+  @@map("reseller")
+}
+
+model Material {
+  id   String  @id @default(uuid()) @db.Uuid
+  name String  @unique
+  url  String?
+
+  figures Figure[]
+
+  @@map("material")
+}
+
+model Editor {
   id   String @id @default(uuid()) @db.Uuid
   name String
 
-  license_id String @db.Uuid
+  series  Series[]
+  figures Figure[]
 
-  license License @relation(fields: [license_id], references: [id])
+  @@map("editor")
+}
 
-  //figures Figure[]
+model Series {
+  id        String  @id @default(uuid()) @db.Uuid
+  name      String
+  editor_id String? @db.Uuid //temp
 
-  medias Media[]
+  editor Editor? @relation(fields: [editor_id], references: [id])
+
+  figures Figure[]
+
+  @@map("series")
+}
+
+model Character {
+  id         String  @id @default(uuid()) @db.Uuid
+  name       String
+  license_id String? @db.Uuid //temp
+
+  license License? @relation(fields: [license_id], references: [id])
+
+  figures Figure[]
 
   @@map("character")
+}
+
+model License {
+  id   String @id @default(uuid()) @db.Uuid
+  name String
+
+  characters Character[]
+
+  @@map("license")
 }

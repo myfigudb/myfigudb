@@ -1,0 +1,62 @@
+model Figure {
+  id String @id @default(uuid()) @db.Uuid
+
+  editor_id String  @db.Uuid
+  series_id String? @db.Uuid
+
+  name   String
+  scale  String?
+  height Int?
+  unit   String?
+
+  gtin13 String? @unique
+
+  release_date DateTime?
+  color        String?
+  commentary   String?   @db.Text
+
+  editor Editor  @relation(fields: [editor_id], references: [id])
+  series Series? @relation(fields: [series_id], references: [id])
+
+  listings FigureListing[]
+  images   FigureImage[]
+  //comments FigureComment[]
+
+  characters Character[]
+  materials  Material[]
+  tags       Tag[]
+
+  @@map("figure")
+}
+
+model FigureListing {
+  id          String @id @default(uuid()) @db.Uuid
+  reseller_id String @db.Uuid
+  figure_id   String @db.Uuid
+
+  price  Float
+  ref    String?
+  url    String
+  status String
+
+  reseller Reseller @relation(fields: [reseller_id], references: [id])
+  figure   Figure   @relation(fields: [figure_id], references: [id])
+
+  @@map("figure_listing")
+}
+
+model FigureImage {
+  id        String @id @default(uuid()) @db.Uuid
+  figure_id String @db.Uuid
+
+  image_path String
+  priority   Int    @default(0)
+  size       Int    @default(0)
+
+  figure Figure @relation(fields: [figure_id], references: [id])
+
+  @@map("figure_image")
+}
+
+
+
