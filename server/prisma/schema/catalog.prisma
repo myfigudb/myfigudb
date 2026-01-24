@@ -52,13 +52,12 @@ model Editor {
 model Character {
   id         String @id @default(uuid()) @db.Uuid
   name       String
-  license_id String @db.Uuid //temp
+  license_id String @db.Uuid
 
   license License @relation(fields: [license_id], references: [id])
 
   figures   Figure[]
   medias     Media[]
-  mediaHash String?
 
   @@map("character")
 }
