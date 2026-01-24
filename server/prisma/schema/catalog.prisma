@@ -71,3 +71,9 @@ model License {
 
   @@map("license")
 }
+
+model Material {
+  name String @unique
+
+  @@map("material")
+}

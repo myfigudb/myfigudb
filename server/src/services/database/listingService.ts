@@ -58,14 +58,4 @@ export class ListingService {
             where: { id }
         });
     }
-
-    /**
-     * Check if a listing exists.
-     */
-    async existsListing(id: string): Promise<boolean> {
-        const count = await pclient.figureListing.count({
-            where: { id }
-        });
-        return count > 0;
-    }
 }
