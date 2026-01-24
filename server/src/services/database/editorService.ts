@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Editor, Prisma} from "../../generated/prisma/client.js";
+import {Editor, License, Prisma} from "../../generated/prisma/client.js";
 
 export class EditorService {
 
@@ -54,5 +54,14 @@ export class EditorService {
         return pclient.editor.delete({
             where: { id }
         });
+    }
+
+    async geEditorBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Editor[]> {
+        return pclient.$queryRaw<Editor[]>`
+            SELECT *
+            FROM "editor"
+            WHERE similarity(name, ${name}) > ${threshold}
+            LIMIT ${limit};
+        `;
     }
 }
