@@ -1,8 +1,8 @@
 model Figure {
   id String @id @default(uuid()) @db.Uuid
 
-  editor_id String  @db.Uuid
-  series_id String? @db.Uuid
+  editor_id String @db.Uuid
+  range_id  String @db.Uuid
 
   name   String
   scale  String?
@@ -15,8 +15,8 @@ model Figure {
   color        String?
   commentary   String?   @db.Text
 
-  editor Editor  @relation(fields: [editor_id], references: [id])
-  series Series? @relation(fields: [series_id], references: [id])
+  editor Editor @relation(fields: [editor_id], references: [id])
+  ranges Range  @relation(fields: [range_id], references: [id])
 
   listings FigureListing[]
   images   FigureImage[]

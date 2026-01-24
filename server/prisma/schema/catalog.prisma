@@ -27,34 +27,34 @@ model Material {
   @@map("material")
 }
 
-model Editor {
-  id   String @id @default(uuid()) @db.Uuid
-  name String
-
-  series  Series[]
-  figures Figure[]
-
-  @@map("editor")
-}
-
-model Series {
-  id        String  @id @default(uuid()) @db.Uuid
+model Range {
+  id        String @id @default(uuid()) @db.Uuid
   name      String
-  editor_id String? @db.Uuid //temp
+  editor_id String @db.Uuid
 
-  editor Editor? @relation(fields: [editor_id], references: [id])
+  editor Editor @relation(fields: [editor_id], references: [id])
 
   figures Figure[]
 
   @@map("series")
 }
 
-model Character {
-  id         String  @id @default(uuid()) @db.Uuid
-  name       String
-  license_id String? @db.Uuid //temp
+model Editor {
+  id   String @id @default(uuid()) @db.Uuid
+  name String
 
-  license License? @relation(fields: [license_id], references: [id])
+  ranges  Range[]
+  figures Figure[]
+
+  @@map("editor")
+}
+
+model Character {
+  id         String @id @default(uuid()) @db.Uuid
+  name       String
+  license_id String @db.Uuid //temp
+
+  license License @relation(fields: [license_id], references: [id])
 
   figures   Figure[]
   media     Media?   @relation(fields: [mediaHash], references: [hash])
