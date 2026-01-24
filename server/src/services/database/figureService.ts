@@ -38,7 +38,7 @@ export class FigureService {
      * Create a new Figure.
      * Note: Relations (Series, Editor) should be connected via ID in the 'data' object.
      */
-    async createFigure(data: Prisma.FigureCreateInput): Promise<Figure> {
+    async createFigure(data: Prisma.FigureUncheckedCreateInput): Promise<Figure> {
         return pclient.figure.create({
             data: data
         });
