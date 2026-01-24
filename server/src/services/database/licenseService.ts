@@ -1,6 +1,6 @@
 import {pclient} from "../../config/prisma.js";
 
-import {License, Prisma} from "../../generated/prisma/client.js";
+import {Character, License, Prisma} from "../../generated/prisma/client.js";
 
 
 export class LicenseService {
@@ -53,6 +53,21 @@ export class LicenseService {
     async deleteLicense(id: string): Promise<License> {
         return pclient.license.delete({
             where: { id }
+        });
+    }
+
+    /**
+     * Find License with exact name matching.
+     * @param name
+     */
+    async getLicenseByExactName(name: string): Promise<License| null> {
+        return pclient.license.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
         });
     }
 
