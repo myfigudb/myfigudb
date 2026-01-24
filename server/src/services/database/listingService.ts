@@ -34,7 +34,7 @@ export class ListingService {
      * Create a new Listing.
      * Data must include connections to Figure and Reseller via IDs.
      */
-    async createListing(data: Prisma.FigureListingCreateInput): Promise<FigureListing> {
+    async createListing(data: Prisma.FigureListingUncheckedCreateInput): Promise<FigureListing> {
         return pclient.figureListing.create({
             data: data
         });
