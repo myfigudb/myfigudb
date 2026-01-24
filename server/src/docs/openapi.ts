@@ -6,6 +6,9 @@ import {userRegistry} from "./domains/user_docs.js";
 import {figureRegistry} from "./domains/figure_docs.js";
 import {materialRegistry} from "./domains/material_doc.js";
 import {listingRegistry} from "./domains/listing_doc.js";
+import {editorRegistry} from "./domains/editor_doc.js";
+import {resellerRegistry} from "./domains/reseller_doc.js";
+import {rangeRegistry} from "./domains/range_doc.js";
 
 export const generateOpenApiDocs = () => {
     const generator = new OpenApiGeneratorV3([
@@ -15,6 +18,9 @@ export const generateOpenApiDocs = () => {
         ...figureRegistry.definitions,
         ...materialRegistry.definitions,
         ...listingRegistry.definitions,
+        ...editorRegistry.definitions,
+        ...resellerRegistry.definitions,
+        ...rangeRegistry.definitions,
     ]);
 
     return generator.generateDocument({
