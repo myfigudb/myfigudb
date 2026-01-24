@@ -4,11 +4,11 @@ import {Material, Prisma} from "../../generated/prisma/client.js";
 export class MaterialService {
 
     /**
-     * Retrieve a Material by its unique ID.
+     * Retrieve a Material by its unique Name.
      */
-    async getMaterialById(id: string): Promise<Material | null> {
+    async getMaterial(name: string): Promise<Material | null> {
         return pclient.material.findUnique({
-            where: { id }
+            where: { name }
         });
     }
 
@@ -29,21 +29,21 @@ export class MaterialService {
     }
 
     /**
-     * Update an existing Material.
+     * Update an existing Material using its Name.
      */
-    async updateMaterial(id: string, data: Prisma.MaterialUpdateInput): Promise<Material> {
+    async updateMaterial(name: string, data: Prisma.MaterialUpdateInput): Promise<Material> {
         return pclient.material.update({
-            where: { id },
+            where: { name },
             data: data
         });
     }
 
     /**
-     * Delete a Material.
+     * Delete a Material using its Name.
      */
-    async deleteMaterial(id: string): Promise<Material> {
+    async deleteMaterial(name: string): Promise<Material> {
         return pclient.material.delete({
-            where: { id }
+            where: { name }
         });
     }
 }
