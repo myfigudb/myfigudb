@@ -66,7 +66,7 @@ export class MaterialService {
     async getMaterialBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Material[]> {
         return pclient.$queryRaw<Material[]>`
             SELECT *
-            FROM "materials"
+            FROM "material"
             WHERE similarity(name, ${name}) > ${threshold}
             LIMIT ${limit};
         `;
