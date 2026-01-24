@@ -72,13 +72,16 @@ export class ResellerService {
     }
 
     /**
-     * Find Resellers with similar names using trigram similarity (PostgreSQL pg_trgm).
+     * Find resellers with similar names using trigram similarity (PostgreSQL pg_trgm).
+     *
+     * IMPORTANT : We use strict SQL here, so we must use the database table name ("reseller"),
+     * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("reseller")
+     *
      * @param name          Name to search
      * @param threshold     Trigger threshold (default: 0.3)
      * @param limit         Number of results to return (default: 5)
      */
     async getResellerBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Reseller[]> {
-        // Attention : La table s'appelle "reseller" en base (défini par @@map("reseller"))
         return pclient.$queryRaw<Reseller[]>`
             SELECT *
             FROM "reseller"

@@ -89,10 +89,14 @@ export class FigureService {
     }
 
     /**
-     * Find Figures with similar names using trigram similarity (PostgreSQL pg_trgm).
+     * Find figure with similar names using trigram similarity (PostgreSQL pg_trgm).
+     *
+     * IMPORTANT : We use strict SQL here, so we must use the database table name ("figure"),
+     * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("figure")
+     *
      * @param name          Name to search
      * @param threshold     Trigger threshold (default: 0.3)
-     * @param limit         Number of results to return (default: 5)
+     * @param limit         Number of results to return (default: 1)
      */
     async getFigureBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Figure[]> {
         return pclient.$queryRaw<Figure[]>`
