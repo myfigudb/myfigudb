@@ -1,14 +1,36 @@
 import { z } from 'zod';
 
-
-export const ScrapSchema = z.object({
-    url: z.httpUrl(),
-    scraped_at: z.date().default(() => new Date()),
-
+export const EditorScrapSchema = z.object({
     name: z.string().min(1).trim(),
+    url: z.url().optional(),
+});
+export type EditorScrapDTO = z.infer<typeof EditorScrapSchema>;
 
-    gtin13: z.string().length(13).regex(/^\d+$/).nullable().optional()
-        .describe("Code barre EAN/JAN à 13 chiffres. C'est la clé unique universelle pour lier les fiches."),
+export const RangeScrapSchema = z.object({
+    name: z.string().min(1).trim()
+});
+export type RangeScrapDTO = z.infer<typeof RangeScrapSchema>;
+
+export const LicenseScrapSchema = z.object({
+    name: z.string().min(1).trim()
+});
+export type LicenseScrapDTO = z.infer<typeof LicenseScrapSchema>;
+
+export const CharacterScrapSchema = z.object({
+    name: z.string().min(1).trim()
+});
+export type CharacterScrapDTO = z.infer<typeof CharacterScrapSchema>;
+
+export const MaterialScrapSchema = z.object({
+    name: z.string().min(1).trim()
+});
+export type MaterialScrapDTO = z.infer<typeof MaterialScrapSchema>;
+
+
+
+export const ListingScrapSchema = z.object({
+    url: z.url(),
+    scraped_at: z.date().default(() => new Date()),
 
     ref: z.string().trim().optional()
         .describe("La référence interne du vendeur (SKU)"),
@@ -18,22 +40,39 @@ export const ScrapSchema = z.object({
     in_stock: z.boolean().default(true),
     availability_label: z.string().optional(),
 
-    editor: z.string().trim().optional(),
-    range: z.string().trim().optional(),
+    images: z.array(z.url()).default([]),
 
-    licenses: z.array(z.string().trim()).default([]),
-    characters: z.array(z.string().trim()).default([]),
+    description: z.string().trim().optional(),
+});
+export type ListingScrapDTO = z.infer<typeof ListingScrapSchema>;
+
+
+
+export const FigureScrapSchema = z.object({
+    name: z.string().min(1).trim(),
+
+    gtin13: z.string().length(13).regex(/^\d+$/).nullable().optional()
+        .describe("Code barre EAN/JAN à 13 chiffres."),
+
+    release_date: z.string().optional(),
+
+    editor: EditorScrapSchema.optional(),
+    range: RangeScrapSchema.optional(),
+    licenses: z.array(LicenseScrapSchema).default([]),
+    characters: z.array(CharacterScrapSchema).default([]),
+    materials: z.array(MaterialScrapSchema).default([]),
 
     scale: z.string().trim().optional(),
     height: z.number().int().optional()
         .describe("Hauteur normalisée en MILLIMÈTRES"),
-    materials: z.array(z.string().trim()).default([]),
+});
+export type FigureScrapDTO = z.infer<typeof FigureScrapSchema>;
 
-    release_date: z.string().optional(),
 
-    images: z.array(z.httpUrl()).default([]),
 
-    description: z.string().trim().optional()
+export const FigurePageScrapSchema = z.object({
+    listing: ListingScrapSchema,
+    figure: FigureScrapSchema
 });
 
-export type ScrapDTO = z.infer<typeof ScrapSchema>;
+export type FigurePageScrapDTO = z.infer<typeof FigurePageScrapSchema>;
