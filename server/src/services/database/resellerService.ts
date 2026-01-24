@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Reseller, Prisma, Range} from "../../generated/prisma/client.js";
+import {Reseller, Prisma} from "../../generated/prisma/client.js";
 
 export class ResellerService {
 
@@ -9,6 +9,15 @@ export class ResellerService {
     async getResellerById(id: string): Promise<Reseller | null> {
         return pclient.reseller.findUnique({
             where: { id }
+        });
+    }
+
+    /**
+     * Retrieve a Reseller by its unique Domain.
+     */
+    async getResellerByDomain(domain: string): Promise<Reseller | null> {
+        return pclient.reseller.findUnique({
+            where: { domain }
         });
     }
 
