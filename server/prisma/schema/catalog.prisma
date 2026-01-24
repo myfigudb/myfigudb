@@ -8,9 +8,10 @@ model Tag {
 }
 
 model Reseller {
-  id   String @id @default(uuid()) @db.Uuid
-  name String @unique
-  url  String
+  id     String @id @default(uuid()) @db.Uuid
+  name   String @unique
+  domain String @unique
+  url    String
 
   listings FigureListing[]
 
