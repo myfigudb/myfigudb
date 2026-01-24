@@ -1,10 +1,12 @@
 import axios from 'axios';
-import {QueueService} from "../../../services/database/QueueService.js";
+
+import {QueueService} from "../../../services/database/queueService.js";
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export abstract class BaseCrawler {
 
+    queue = new QueueService()
     /**
      * Main method to crawl a category and its pagination
      */
@@ -33,7 +35,7 @@ export abstract class BaseCrawler {
                 let new_figures_count = 0;
 
                 for (const url of urls) {
-                    const added = await QueueService.enqueue(url);
+                    const added = await this.queue.enqueue(url);
                     if (added) new_figures_count++;
                 }
 
