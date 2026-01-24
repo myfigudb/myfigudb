@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Figure, Prisma} from "../../generated/prisma/client.js";
+import {Editor, Figure, Prisma} from "../../generated/prisma/client.js";
 
 export class FigureService {
 
@@ -71,6 +71,21 @@ export class FigureService {
             where: { id }
         });
         return count > 0;
+    }
+
+    /**
+     * Find Figure with exact name matching.
+     * @param name
+     */
+    async getFigureByExactName(name: string): Promise<Figure| null> {
+        return pclient.figure.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
+        });
     }
 
     /**

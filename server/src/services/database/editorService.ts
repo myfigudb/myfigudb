@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Editor, License, Prisma} from "../../generated/prisma/client.js";
+import {Character, Editor, License, Prisma} from "../../generated/prisma/client.js";
 
 export class EditorService {
 
@@ -56,7 +56,23 @@ export class EditorService {
         });
     }
 
-    async geEditorBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Editor[]> {
+
+    /**
+     * Find Editor with exact name matching.
+     * @param name
+     */
+    async getEditorByExactName(name: string): Promise<Editor| null> {
+        return pclient.editor.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
+        });
+    }
+
+    async getEditorBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Editor[]> {
         return pclient.$queryRaw<Editor[]>`
             SELECT *
             FROM "editor"

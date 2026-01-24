@@ -79,7 +79,7 @@ export class CharacterService {
     }
 
     /**
-     * Find Characters with exact name matching.
+     * Find Character with exact name matching.
      * @param name
      */
     async getCharacterByExactName(name: string): Promise<Character| null> {

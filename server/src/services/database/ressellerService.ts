@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Reseller, Prisma} from "../../generated/prisma/client.js";
+import {Reseller, Prisma, Range} from "../../generated/prisma/client.js";
 
 export class ResellerService {
 
@@ -53,6 +53,21 @@ export class ResellerService {
     async deleteReseller(id: string): Promise<Reseller> {
         return pclient.reseller.delete({
             where: { id }
+        });
+    }
+
+    /**
+     * Find Reseller with exact name matching.
+     * @param name
+     */
+    async getResellerByExactName(name: string): Promise<Reseller| null> {
+        return pclient.reseller.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
         });
     }
 

@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {License, Material, Prisma} from "../../generated/prisma/client.js";
+import {Figure, License, Material, Prisma} from "../../generated/prisma/client.js";
 
 export class MaterialService {
 
@@ -46,6 +46,22 @@ export class MaterialService {
             where: { name }
         });
     }
+
+    /**
+     * Find Material with exact name matching.
+     * @param name
+     */
+    async getMaterialByExactName(name: string): Promise<Material| null> {
+        return pclient.material.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
+        });
+    }
+
 
     async getMaterialBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Material[]> {
         return pclient.$queryRaw<Material[]>`

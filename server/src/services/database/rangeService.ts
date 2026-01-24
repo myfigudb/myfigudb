@@ -1,5 +1,5 @@
 import {pclient} from "../../config/prisma.js";
-import {Range, Prisma} from "../../generated/prisma/client.js";
+import {Range, Prisma, Material} from "../../generated/prisma/client.js";
 
 export class RangeService {
 
@@ -75,6 +75,21 @@ export class RangeService {
     async deleteRange(id: string): Promise<Range> {
         return pclient.range.delete({
             where: { id }
+        });
+    }
+
+    /**
+     * Find Range with exact name matching.
+     * @param name
+     */
+    async getRangeByExactName(name: string): Promise<Range| null> {
+        return pclient.range.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
         });
     }
 
