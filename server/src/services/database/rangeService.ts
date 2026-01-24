@@ -94,8 +94,14 @@ export class RangeService {
     }
 
     /**
-     * Find Ranges with similar names using trigram similarity.
-     * IMPORTANT: Table name is "range" due to @@map("range")
+     * Find ranges with similar names using trigram similarity (PostgreSQL pg_trgm).
+     *
+     * IMPORTANT : We use strict SQL here, so we must use the database table name ("series"),
+     * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("series")
+     *
+     * @param name          Name to search
+     * @param threshold     Trigger threshold (default: 0.3)
+     * @param limit         Number of results to return (default: 5)
      */
     async getRangeBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Range[]> {
         return pclient.$queryRaw<Range[]>`
