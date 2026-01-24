@@ -57,6 +57,3 @@ model FigureImage {
 
   @@map("figure_image")
 }
-
-
-

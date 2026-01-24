@@ -56,7 +56,9 @@ model Character {
 
   license License? @relation(fields: [license_id], references: [id])
 
-  figures Figure[]
+  figures   Figure[]
+  media     Media?   @relation(fields: [mediaHash], references: [hash])
+  mediaHash String?
 
   @@map("character")
 }
