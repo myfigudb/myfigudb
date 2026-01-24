@@ -79,9 +79,24 @@ export class CharacterService {
     }
 
     /**
+     * Find Characters with exact name matching.
+     * @param name
+     */
+    async getCharacterByExactName(name: string): Promise<Character| null> {
+        return pclient.character.findFirst({
+            where: {
+                name: {
+                    equals: name.trim(),
+                    mode: 'insensitive'
+                }
+            }
+        });
+    }
+
+    /**
      * Find Characters with similar names using trigram similarity (PostgreSQL pg_trgm).
      *
-     * IMPORTANT : We use strict SQL here, so we must use the database table name ("Character"),
+     * IMPORTANT : We use strict SQL here, so we must use the database table name ("character"),
      * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("Character")
      *
      * @param name          Name to search
