@@ -15,7 +15,7 @@ export class FigureService {
                 images: {
                     orderBy: { priority: 'asc' }
                 },
-                series: true,
+                ranges: true,
                 editor: true,
             }
         });
@@ -28,7 +28,7 @@ export class FigureService {
                     where: { priority: 0 },
                     take: 1
                 },
-                series: true,
+                ranges: true,
                 editor: true
             }
         });
