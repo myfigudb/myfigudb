@@ -11,3 +11,17 @@ model Media {
 
   @@map("media")
 }
+
+model FigureMedia {
+  figure_id  String @db.Uuid
+  media_hash String
+
+  is_primary Boolean @default(false)
+  order      Int     @default(0)
+
+  figure Figure @relation(fields: [figure_id], references: [id])
+  media  Media  @relation(fields: [media_hash], references: [hash])
+
+  @@id([figure_id, media_hash])
+  @@map("figure_media")
+}
