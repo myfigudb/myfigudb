@@ -4,10 +4,14 @@ model Media {
   extension String
   folder    String @default("uploads")
 
-  characters Character[]
+  origin_url String?
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  characters Character[]
+
+  figureMedias FigureMedia[]
 
   @@map("media")
 }
