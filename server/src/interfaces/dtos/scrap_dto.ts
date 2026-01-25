@@ -47,7 +47,7 @@ export const ListingScrapSchema = z.object({
     //availability_label: z.string().optional(),
 
     //TODO AJOUTER IMAGE GETTER
-    //images: z.array(z.url()).default([]),
+    images_urls: z.array(z.url()).default([]),
 
     description: z.string().trim().optional(),
 });
