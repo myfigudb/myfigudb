@@ -43,8 +43,8 @@ export const toCharacterDTO = (source: CharacterInput): CharacterResponse => {
         name: source.name,
         license_id: source.license_id,
 
-        medias: source.medias.map((media) =>
+        medias: source.medias?.map((media) =>
             StorageService.getPublicUrl(media.hash, media.extension, media.folder)
-        ),
+        ) ?? [],
     };
 };
