@@ -39,7 +39,10 @@ model FigureListing {
   ref      String?
   url      String
 
+  images_urls String[] @map("image_urls")
   description String?
+
+  raw Json //Scrap de la page
   //status String
 
   reseller Reseller @relation(fields: [reseller_id], references: [id])

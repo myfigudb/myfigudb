@@ -103,7 +103,7 @@ export class ChibiStrategy implements ScraperStrategy {
                 price: isNaN(price) ? 0 : price,
                 currency: 'EUR',
                 in_stock: true,
-                images: images,
+                images_urls: images,
                 description: description
             },
             figure: {
