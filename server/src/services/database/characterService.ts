@@ -19,7 +19,13 @@ export class CharacterService {
     }
 
     async getAllCharacters(): Promise<Character[]> {
-        return pclient.character.findMany();
+        return pclient.character.findMany({
+            include: {
+                medias: {
+                    take: 1,
+                }
+            }
+        });
     }
 
     /**
