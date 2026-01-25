@@ -19,14 +19,25 @@ model Figure {
   ranges Range? @relation(fields: [range_id], references: [id])
 
   listings FigureListing[]
-  images   FigureImage[]
-  //comments FigureComment[]
+  images   FigureMedia[]
+  comments FigureComment[]
 
   characters Character[]
   materials  Material[]
   tags       Tag[]
 
   @@map("figure")
+}
+
+model FigureComment {
+  id String @id @default(uuid()) @db.Uuid
+
+  user_id   String @db.Uuid
+  figure_id String @db.Uuid
+
+  parent_id String @db.Uuid
+
+  figures Figure[]
 }
 
 model FigureListing {
@@ -39,7 +50,7 @@ model FigureListing {
   ref      String?
   url      String
 
-  images_urls String[] @map("image_urls")
+  images_urls String[]
   description String?
 
   raw Json //Scrap de la page
@@ -49,17 +60,4 @@ model FigureListing {
   figure   Figure   @relation(fields: [figure_id], references: [id])
 
   @@map("figure_listing")
-}
-
-model FigureImage {
-  id        String @id @default(uuid()) @db.Uuid
-  figure_id String @db.Uuid
-
-  image_path String
-  priority   Int    @default(0)
-  size       Int    @default(0)
-
-  figure Figure @relation(fields: [figure_id], references: [id])
-
-  @@map("figure_image")
 }
