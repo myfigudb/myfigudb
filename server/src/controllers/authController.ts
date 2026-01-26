@@ -1,5 +1,5 @@
 import {Request, RequestHandler, Response} from 'express';
-import {AuthService} from "../services/database/authService.js";
+import {AuthService} from "../services/database/user/authService.js";
 import {AuthDTO} from "../interfaces/dtos/auth_dto.js";
 
 const service = new AuthService();

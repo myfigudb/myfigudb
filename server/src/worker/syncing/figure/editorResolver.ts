@@ -1,6 +1,6 @@
 import { Editor } from '../../../generated/prisma/client.js';
 import { EntityResolver } from '../entityResolver.js';
-import { EditorService } from "../../../services/database/editorService.js";
+import { EditorService } from "../../../services/database/figure/editorService.js";
 import { EditorScrapDTO } from "../../../interfaces/dtos/scrap_dto.js";
 
 export class EditorResolver implements EntityResolver<Editor, EditorScrapDTO> {

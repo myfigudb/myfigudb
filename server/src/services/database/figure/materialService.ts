@@ -1,5 +1,5 @@
-import {pclient} from "../../config/prisma.js";
-import {Figure, License, Material, Prisma} from "../../generated/prisma/client.js";
+import {pclient} from "../../../config/prisma.js";
+import {Figure, License, Material, Prisma} from "../../../generated/prisma/client.js";
 
 export class MaterialService {
 

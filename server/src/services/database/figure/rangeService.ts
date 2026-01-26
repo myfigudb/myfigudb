@@ -1,5 +1,5 @@
-import {pclient} from "../../config/prisma.js";
-import {Range, Prisma, Material} from "../../generated/prisma/client.js";
+import {pclient} from "../../../config/prisma.js";
+import {Range, Prisma, Material} from "../../../generated/prisma/client.js";
 
 export class RangeService {
 

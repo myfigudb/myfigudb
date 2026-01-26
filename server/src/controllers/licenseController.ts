@@ -1,5 +1,5 @@
 import {Request, RequestHandler, Response} from 'express';
-import {LicenseService} from "../services/database/licenseService.js";
+import {LicenseService} from "../services/database/figure/licenseService.js";
 import {tr} from "zod/v4/locales/index.js";
 import {CreateLicenseDTO, createLicenseSchema} from "../interfaces/dtos/entities/license_dto.js";
 import {ParamsIdDTO, ParamsNameDTO} from "../interfaces/dtos/params_dto.js";

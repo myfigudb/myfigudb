@@ -1,7 +1,7 @@
 import {Material} from '../../../generated/prisma/client.js';
 import {EntityResolver} from '../entityResolver.js';
 import {MaterialScrapDTO} from "../../../interfaces/dtos/scrap_dto.js";
-import {MaterialService} from "../../../services/database/materialService.js";
+import {MaterialService} from "../../../services/database/figure/materialService.js";
 
 export class MaterialResolver implements EntityResolver<Material, MaterialScrapDTO> {
 

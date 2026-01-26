@@ -1,5 +1,5 @@
 import {Request, RequestHandler, Response} from 'express';
-import {UserService} from "../services/database/userService.js";
+import {UserService} from "../services/database/user/userService.js";
 import {CreateUserDTO} from "../interfaces/dtos/entities/user_dto.js";
 import {ParamsIdDTO} from "../interfaces/dtos/params_dto.js";
 

@@ -1,6 +1,6 @@
-import {pclient} from "../../config/prisma.js";
+import {pclient} from "../../../config/prisma.js";
 
-import {Character, Prisma} from "../../generated/prisma/client.js";
+import {Character, Prisma} from "../../../generated/prisma/client.js";
 
 
 export class CharacterService {

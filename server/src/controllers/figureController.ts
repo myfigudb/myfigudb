@@ -1,5 +1,5 @@
 import {Request, RequestHandler, Response} from 'express';
-import {FigureService} from "../services/database/figureService.js";
+import {FigureService} from "../services/database/figure/figureService.js";
 
 
 import {ParamsIdDTO, ParamsNameDTO} from "../interfaces/dtos/params_dto.js";

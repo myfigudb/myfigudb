@@ -1,5 +1,5 @@
-import {pclient} from "../../config/prisma.js";
-import {Character, Editor, License, Prisma} from "../../generated/prisma/client.js";
+import {pclient} from "../../../config/prisma.js";
+import {Character, Editor, License, Prisma} from "../../../generated/prisma/client.js";
 
 export class EditorService {
 

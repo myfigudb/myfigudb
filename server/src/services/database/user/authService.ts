@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import { UserService } from "./userService.js";
-import { User } from "../../generated/prisma/client.js";
+import { User } from "../../../generated/prisma/client.js";
 
 const SECRET_KEY = process.env.JWT_SECRET || 'dev_secret_key';
 

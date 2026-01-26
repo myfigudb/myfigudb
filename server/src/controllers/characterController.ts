@@ -1,5 +1,5 @@
 import {Request, RequestHandler, Response} from 'express';
-import {CharacterService} from "../services/database/characterService.js";
+import {CharacterService} from "../services/database/figure/characterService.js";
 import {StorageService} from "../services/storageService.js";
 import {MediaService} from "../services/database/mediaService.js";
 

@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { EditorService } from "../services/database/editorService.js";
+import { EditorService } from "../services/database/figure/editorService.js";
 import { CreateEditorDTO, toEditorDTO } from "../interfaces/dtos/entities/editor_dto.js";
 
 const service = new EditorService();

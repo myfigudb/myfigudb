@@ -1,5 +1,5 @@
-import {pclient} from "../../config/prisma.js";
-import {Editor, Figure, Prisma} from "../../generated/prisma/client.js";
+import {pclient} from "../../../config/prisma.js";
+import {Editor, Figure, Prisma} from "../../../generated/prisma/client.js";
 
 export class FigureService {
 
