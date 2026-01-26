@@ -9,13 +9,18 @@ extendZodWithOpenApi(z)
  */
 export const createFigureSchema = z.object({
     name: z.string().min(1).trim(),
-    range_id: z.string().uuid().optional(), // Correction parenthèses + string
-    editor_id: z.string().uuid().optional(), // Décommenté pour la cohérence
 
     scale: z.string().optional(),
     height: z.number().optional(),
+
+    editor_id: z.uuid(),
+    range_id: z.uuid().optional(),
+
+    gtin13: z.string().optional(),
+
     release_date: z.coerce.date().optional(),
-    commentary: z.string().optional(),
+    //color
+    commentary: z.string().optional()
 })
 
 export type CreateFigureDTO = z.infer<typeof createFigureSchema>;
@@ -25,10 +30,10 @@ export type CreateFigureDTO = z.infer<typeof createFigureSchema>;
  * OUTPUT DTO: Figure response
  */
 export const figureResponseSchema = z.object({
-    id: z.string().uuid(),
+    id: z.uuid(),
     name: z.string(),
-    range_id: z.string().uuid().nullable(),
-    editor_id: z.string().uuid().nullable(),
+    range_id: z.uuid().nullable(),
+    editor_id: z.uuid().nullable(),
     scale: z.string().nullable().optional(),
 })
 
