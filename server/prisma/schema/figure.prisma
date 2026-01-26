@@ -24,7 +24,6 @@ model Figure {
 
   characters Character[]
   materials  Material[]
-  tags       Tag[]
 
   @@map("figure")
 }

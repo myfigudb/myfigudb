@@ -1,5 +1,6 @@
 import {pclient} from "../../../config/prisma.js";
-import {Editor, Figure, Prisma} from "../../../generated/prisma/client.js";
+import {Figure, Prisma} from "../../../generated/prisma/client.js";
+
 
 export class FigureService {
 
@@ -13,7 +14,10 @@ export class FigureService {
             where: { id },
             include: {
                 images: {
-                    orderBy: { priority: 'asc' }
+                    orderBy: { priority: 'desc' },
+                    include: {
+                        media: true
+                    }
                 },
                 ranges: true,
                 editor: true,
@@ -21,15 +25,20 @@ export class FigureService {
         });
     }
 
+
+
     async getAllFigures(): Promise<Figure[]> {
         return pclient.figure.findMany({
             include: {
                 images: {
-                    where: { priority: 0 },
-                    take: 1
+                    orderBy: { priority: 'desc'},
+                    take: 1,
+                    include: {
+                        media: true
+                    }
                 },
                 ranges: true,
-                editor: true
+                editor: true,
             }
         });
     }
@@ -113,15 +122,16 @@ export class FigureService {
      * @param id The Figure ID
      * @param imagesData Array of image objects containing path, priority, etc.
      */
-    async attachImages(id: string, imagesData: { path: string, size: number, priority: number }[]): Promise<Figure> {
+    async attachImages(id: string, imagesData: { hash: string, priority: number }[]): Promise<Figure> {
         return pclient.figure.update({
             where: { id },
             data: {
                 images: {
                     create: imagesData.map(img => ({
-                        image_path: img.path,
-                        size: img.size,
-                        priority: img.priority
+                        priority: img.priority,
+                        media: {
+                            connect: { hash: img.hash }
+                        }
                     }))
                 }
             },
