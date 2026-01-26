@@ -32,7 +32,8 @@ export class Sync {
             await this.listingService.createListing({
                 ...listing_data,
                 reseller_id: reseller.id,
-                figure_id: figure.id
+                figure_id: figure.id,
+                raw: fg,
             });
 
             console.log("Ingestion Complete!");
