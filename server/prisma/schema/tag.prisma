@@ -16,6 +16,8 @@ model Tag {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  figure_tags FigureTag[]
+
   @@map("tag")
 }
 
@@ -35,7 +37,9 @@ model FigureTag {
 
   added_by String @db.Uuid
 
-  contributor User @relation(fields: [added_by], references: [id])
+  contributor User   @relation(fields: [added_by], references: [id])
+  figure      Figure @relation(fields: [figure_id], references: [id])
+  tag         Tag    @relation(fields: [tag_id], references: [id])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

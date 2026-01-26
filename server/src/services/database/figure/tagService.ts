@@ -1,5 +1,5 @@
 import { pclient } from "../../../config/prisma.js";
-import { Tag, Prisma } from "../../../generated/prisma/client.js";
+import {Tag, Prisma, FigureTag, FigureTagStatus} from "../../../generated/prisma/client.js";
 
 export class TagService {
 
@@ -112,6 +112,33 @@ export class TagService {
             take: limit,
             orderBy: {
                 label: 'asc'
+            }
+        });
+    }
+
+
+    //FIGURE TAG
+    async getTagValidationSurvey(user_id: string): Promise<FigureTag | null> {
+        const filter = {
+            status: 'PENDING' as FigureTagStatus,
+            added_by: { not: user_id },
+            reviews: {
+                none: { reviewed_by: user_id }
+            }
+        };
+
+        const count = await pclient.figureTag.count({ where: filter });
+
+        if (count === 0) return null;
+
+        const rdm_index = Math.floor(Math.random() * count);
+
+        return pclient.figureTag.findFirst({
+            where: filter,
+            skip: rdm_index,
+            include: {
+                tag: true,
+                figure: true
             }
         });
     }

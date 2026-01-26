@@ -23,6 +23,7 @@ model Figure {
   comments   FigureComment[]
   characters Character[]
   materials  Material[]
+  tags       FigureTag[]
 
   @@map("figure")
 }
