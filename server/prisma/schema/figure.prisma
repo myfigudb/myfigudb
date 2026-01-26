@@ -52,8 +52,8 @@ model FigureListing {
   images_urls String[]
   description String?
 
-  raw Json //Scrap de la page
-  //status String
+  raw Json // Scrap de la page
+  // status String
 
   reseller Reseller @relation(fields: [reseller_id], references: [id])
   figure   Figure   @relation(fields: [figure_id], references: [id])

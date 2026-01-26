@@ -1,0 +1,33 @@
+enum TagStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+model Tag {
+  id    String @id @default(uuid()) @db.Uuid
+  label String @unique
+
+  status TagStatus @default(PENDING)
+
+  created_by String @db.Uuid
+  creator    User   @relation(fields: [created_by], references: [id])
+
+  figures FigureTag[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("tag")
+}
+
+model FigureTag {
+  figure_id String @db.Uuid
+  tag_id    String @db.Uuid
+  added_by  String @db.Uuid
+
+  contributor User @relation(fields: [created_by], references: [id])
+
+  @@id([figure_id, tag_id])
+  @@map("figure_tag")
+}

@@ -1,10 +1,3 @@
-model Tag {
-  id    String @id @default(uuid()) @db.Uuid
-  label String @unique
-
-  @@map("tag")
-}
-
 model Reseller {
   id     String @id @default(uuid()) @db.Uuid
   name   String @unique
@@ -67,8 +60,8 @@ model License {
 
   characters Character[]
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("license")
 }
