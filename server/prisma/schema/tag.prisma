@@ -13,21 +13,51 @@ model Tag {
   created_by String @db.Uuid
   creator    User   @relation(fields: [created_by], references: [id])
 
-  figures FigureTag[]
-
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("tag")
 }
 
+enum FigureTagStatus {
+  PENDING // Score < 200
+  CONFIRMED // Score >= 200
+  DEFINITIVE // Score >= 1000
+}
+
 model FigureTag {
+  id String @id @default(uuid()) @db.Uuid
+
   figure_id String @db.Uuid
   tag_id    String @db.Uuid
-  added_by  String @db.Uuid
 
-  contributor User @relation(fields: [created_by], references: [id])
+  status FigureTagStatus @default(PENDING)
 
-  @@id([figure_id, tag_id])
+  added_by String @db.Uuid
+
+  contributor User @relation(fields: [added_by], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  reviews FigureTagReview[]
+
   @@map("figure_tag")
+}
+
+model FigureTagReview {
+  figure_tag_id String @db.Uuid
+  reviewed_by   String @db.Uuid
+
+  //    value = (-/+)Base + ln(reviewer.lvl + 1) * Multiplicateur
+  // EX: value = 50 + ln(21) * 30 = 141
+  weight Int @default(100)
+
+  figure_tag FigureTag @relation(fields: [figure_tag_id], references: [id])
+  reviewer   User      @relation(fields: [reviewed_by], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([figure_tag_id, reviewed_by])
 }

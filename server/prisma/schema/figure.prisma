@@ -18,10 +18,9 @@ model Figure {
   editor Editor @relation(fields: [editor_id], references: [id])
   ranges Range? @relation(fields: [range_id], references: [id])
 
-  listings FigureListing[]
-  images   FigureMedia[]
-  comments FigureComment[]
-
+  listings   FigureListing[]
+  images     FigureMedia[]
+  comments   FigureComment[]
   characters Character[]
   materials  Material[]
 

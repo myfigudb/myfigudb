@@ -11,4 +11,8 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  reviews     FigureTagReview[]
+  figure_tags FigureTag[]
+  tags        Tag[]
 }
