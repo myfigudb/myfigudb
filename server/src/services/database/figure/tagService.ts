@@ -25,21 +25,19 @@ export class TagService {
      * Create a new tag.
      * The label is cleaned (trimmed) before insertion.
      */
-    async createTag(label: string, created_by: string): Promise<Tag> {
+    async createTag(data: Prisma.TagCreateInput): Promise<Tag> {
         return pclient.tag.create({
-            data: {
-                label: label.trim(),
-            }
+            data : data
         });
     }
 
     /**
      * Update a tag label.
      */
-    async updateTag(id: string, new_label: string): Promise<Tag> {
+    async updateTag(id: string, data: Prisma.TagUpdateInput): Promise<Tag> {
         return pclient.tag.update({
             where: { id },
-            data: { label: new_label.trim() }
+            data: data
         });
     }
 
