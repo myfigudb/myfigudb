@@ -44,24 +44,24 @@ model FigureTag {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  reviews FigureTagReview[]
+  votes FigureTagVote[]
 
   @@map("figure_tag")
 }
 
-model FigureTagReview {
+model FigureTagVote {
   figure_tag_id String @db.Uuid
-  reviewed_by   String @db.Uuid
+  voted_by      String @db.Uuid
 
-  //    value = (-/+)Base + ln(reviewer.lvl + 1) * Multiplicateur
+  //    value = (-/+)Base + ln(voter.lvl + 1) * Multiplicateur
   // EX: value = 50 + ln(21) * 30 = 141
   weight Int @default(100)
 
   figure_tag FigureTag @relation(fields: [figure_tag_id], references: [id])
-  reviewer   User      @relation(fields: [reviewed_by], references: [id])
+  voter      User      @relation(fields: [voted_by], references: [id])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@id([figure_tag_id, reviewed_by])
+  @@id([figure_tag_id, voted_by])
 }
