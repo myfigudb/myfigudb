@@ -9,10 +9,13 @@ model User {
 
   password String
 
+  level Int @default(1)
+  exp   Int @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  reviews     FigureTagReview[]
+  votes       FigureTagVote[]
   figure_tags FigureTag[]
   tags        Tag[]
 }
