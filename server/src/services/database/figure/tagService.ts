@@ -1,7 +1,10 @@
 import { pclient } from "../../../config/prisma.js";
-import {Tag, Prisma, FigureTag, FigureTagStatus} from "../../../generated/prisma/client.js";
+import {Tag, Prisma, FigureTag, FigureTagStatus, FigureTagVote} from "../../../generated/prisma/client.js";
+import {UserService} from "./userService.js";
 
 export class TagService {
+
+    private user_service = new UserService();
 
     /**
      * Retrieve a Tag by its unique ID.
@@ -122,8 +125,8 @@ export class TagService {
         const filter = {
             status: 'PENDING' as FigureTagStatus,
             added_by: { not: user_id },
-            reviews: {
-                none: { reviewed_by: user_id }
+            votes: {
+                none: { voted_by: user_id }
             }
         };
 
@@ -141,5 +144,41 @@ export class TagService {
                 figure: true
             }
         });
+    }
+
+
+    async registerTagValidationVote(user_id: string, figure_tag_id: string, vote: boolean): Promise<FigureTagVote> {
+
+        const user_exp = await this.user_service.getUserExp(user_id);
+
+        const weight = this.calculateWeight(user_exp, vote);
+
+        return pclient.figureTagVote.upsert({
+            where: {
+                figure_tag_id_voted_by: {
+                    figure_tag_id: figure_tag_id,
+                    voted_by: user_id
+                }
+            },
+            update: {
+                weight: weight
+            },
+            create: {
+                figure_tag_id: figure_tag_id,
+                voted_by: user_id,
+                weight: weight
+            }
+        });
+    }
+
+    private calculateWeight(exp: number, vote: boolean): number {
+        const VOTE_BASE = 50;
+        const VOTE_MULTIPLIER = 30;
+
+        const factor = Math.log(exp + 1);
+        const raw_weight = VOTE_BASE + (factor * VOTE_MULTIPLIER);
+        const base_weight = Math.round(raw_weight);
+
+        return vote ? base_weight : -base_weight;
     }
 }
