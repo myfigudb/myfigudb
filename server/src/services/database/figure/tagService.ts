@@ -28,7 +28,7 @@ export class TagService {
      * Create a new tag.
      * The label is cleaned (trimmed) before insertion.
      */
-    async createTag(data: Prisma.TagCreateInput): Promise<Tag> {
+    async createTag(data: Prisma.TagUncheckedCreateInput): Promise<Tag> {
         return pclient.tag.create({
             data : data
         });
