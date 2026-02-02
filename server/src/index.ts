@@ -12,8 +12,11 @@ dotenv.config();
 await initBloomFilter();
 
 // OPEN API
-const openApiDocument = generateOpenApiDocs();
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
+const open_api_doc = generateOpenApiDocs();
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(open_api_doc));
+app.get('/openapi.json', (_req, res) => {
+    res.json(open_api_doc);
+});
 
 
 // API
