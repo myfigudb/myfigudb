@@ -149,6 +149,8 @@ export class TagService {
 
     async registerTagValidationVote(user_id: string, figure_tag_id: string, vote: boolean): Promise<FigureTagVote> {
 
+
+        //TODO EVITER L'APPEL ENTRE SERVICES
         const user_exp = await this.user_service.getUserExp(user_id);
 
         const weight = this.calculateWeight(user_exp, vote);
