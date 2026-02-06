@@ -8,6 +8,7 @@ import {
     CreateFigureDTO,
     toFigureDTO
 } from "../interfaces/dtos/entities/figure_dto.js";
+import {FigureSearchDTO, FigureSearchQuery, figureSearchSchema} from "../interfaces/dtos/search_dto.js";
 
 const service = new FigureService();
 
@@ -66,7 +67,7 @@ export class FigureController {
     searchByName: RequestHandler<ParamsNameDTO> = async (req, res) => {
         try {
             const { name } = req.params;
-            // On utilise la méthode de similarité du service
+
             const figures = await service.getFigureBySimilarityName(name);
 
             if (!figures || figures.length === 0) {
@@ -90,6 +91,17 @@ export class FigureController {
         } catch (error) {
             console.error("Error getting all figures:", error);
             return res.status(500).json({ message: "Internal server error" });
+        }
+    }
+
+    search: RequestHandler<{}, any, {}, FigureSearchQuery> = async (req, res) => {
+        try {
+            const result = await service.searchFigure(res.locals.dtos.query as FigureSearchDTO);
+            return res.status(200).json(result);
+
+        } catch (error) {
+            console.error("CRASH VALIDATION:", error);
+            return res.status(500).json({ message: "Internal Error" });
         }
     }
 }
