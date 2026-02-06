@@ -66,7 +66,6 @@ export class FigureController {
     searchByName: RequestHandler<ParamsNameDTO> = async (req, res) => {
         try {
             const { name } = req.params;
-            // On utilise la méthode de similarité du service
             const figures = await service.getFigureBySimilarityName(name);
 
             if (!figures || figures.length === 0) {

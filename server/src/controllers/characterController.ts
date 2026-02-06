@@ -76,7 +76,6 @@ export class CharacterController {
     findAll: RequestHandler = async (req, res) => {
         try {
             const characters = await service.getAllCharacters();
-            // On mappe le résultat pour appliquer le DTO si nécessaire, sinon on renvoie brut
             const response_data = characters.map(c => toCharacterDTO(c as CharacterInput));
             return res.status(200).json(response_data);
         } catch (error) {

@@ -6,7 +6,6 @@ const service = new EditorService();
 
 export class EditorController {
 
-    // Création
     create: RequestHandler<{}, any, CreateEditorDTO> = async (req, res) => {
         try {
             const editor = await service.createEditor(req.body);
@@ -17,10 +16,10 @@ export class EditorController {
         }
     }
 
-    // Récupération de tous les éditeurs
+
     findAll: RequestHandler = async (req, res) => {
         try {
-            const editors = await service.getAllEditors(); // Assure-toi que cette méthode existe dans ton service
+            const editors = await service.getAllEditors();
             const response = editors.map(editor => toEditorDTO(editor));
             return res.status(200).json(response);
         } catch (error) {
