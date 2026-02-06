@@ -1,21 +1,23 @@
-import {Request, Response, NextFunction} from 'express';
-import {ZodError, ZodObject} from "zod";
+import {NextFunction, Request, Response} from 'express';
+import {ZodError, ZodType} from "zod";
 
 interface Validation {
-    body?: ZodObject;
-    params?: ZodObject;
-    query?: ZodObject;
+    body?: ZodType;
+    params?: ZodType;
+    query?: ZodType;
 }
 
 export const validate = (schemas: Validation) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
+            res.locals.dtos = {};
+
             if (schemas.params) {
-                req.params = await schemas.params.parseAsync(req.params) as any;
+                res.locals.dtos.params = await schemas.params.parseAsync(req.params);
             }
 
             if (schemas.query) {
-                req.query = await schemas.query.parseAsync(req.query) as any;
+                res.locals.dtos.query = await schemas.query.parseAsync(req.query);
             }
 
             if (schemas.body) {
@@ -23,7 +25,6 @@ export const validate = (schemas: Validation) => {
             }
 
             return next();
-
         } catch (error) {
             if (error instanceof ZodError) {
                 return res.status(400).json({
@@ -34,8 +35,8 @@ export const validate = (schemas: Validation) => {
                     }))
                 });
             }
-
-            return res.status(500).json({ message: "Internal server error during validation" });
+            console.error("Validation error:", error);
+            return res.status(500).json({ message: "Internal server error" });
         }
     };
 };
