@@ -8,19 +8,19 @@ const CommaList = z.string().optional().transform((val) => {
 /**
  * Exemple URL : ?price_filters=EUR:10:50:auto,USD:20:100:strict
  */
-type PriceFilter = {
+type priceFilter = {
     currency: string;
     min: number | undefined;
     max: number | undefined;
     conversion: boolean;
 };
 
-const PriceFilter = z.string().optional().transform((val) => {
+const priceFilter = z.string().optional().transform((val) => {
     if (!val || val.trim() === "") return [];
 
     const raw_filters = val.split(",");
 
-    return raw_filters.map((filter_str): PriceFilter | null => {
+    return raw_filters.map((filter_str): priceFilter | null => {
         const parts = filter_str.split(":").map(s => s.trim());
 
         if (parts.length < 4) return null;
@@ -39,10 +39,10 @@ const PriceFilter = z.string().optional().transform((val) => {
 
         return { currency, min, max, conversion };
 
-    }).filter((f): f is PriceFilter => f !== null);
+    }).filter((f): f is priceFilter => f !== null);
 });
 
-export const FigureSearchSchema = z.object({
+export const figureSearchSchema = z.object({
     q: z.string().trim().optional(),
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().min(1).max(100).default(20),
@@ -50,7 +50,7 @@ export const FigureSearchSchema = z.object({
     sort_by: z.enum(["price", "rating", "name", "created_at", "release_date"]).default("name"),
     sort_dir: z.enum(["asc", "desc"]).default("asc"),
 
-    price_filters: PriceFilter,
+    price_filters: priceFilter,
 
     min_rating: z.coerce.number().min(0).max(10).optional(),
 
@@ -82,4 +82,5 @@ export const FigureSearchSchema = z.object({
         },
     }));
 
-export type FigureSearchDTO = z.infer<typeof FigureSearchSchema>;
+export type FigureSearchDTO = z.infer<typeof figureSearchSchema>;
+export type FigureSearchQuery = z.input<typeof figureSearchSchema>;
