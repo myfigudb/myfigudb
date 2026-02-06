@@ -1,5 +1,6 @@
 import {pclient} from "../../../config/prisma.js";
 import {Figure, Prisma} from "../../../generated/prisma/client.js";
+import {FigureSearchDTO} from "../../../interfaces/dtos/search_dto.js";
 
 
 export class FigureService {
@@ -82,6 +83,7 @@ export class FigureService {
         return count > 0;
     }
 
+
     /**
      * Find Figure with exact name matching.
      * @param name
@@ -139,5 +141,111 @@ export class FigureService {
                 images: true
             }
         });
+    }
+
+
+
+    async searchFigure(dto: FigureSearchDTO) {
+        const { meta, sorting, filters } = dto;
+
+        const where_clause: Prisma.FigureWhereInput = { AND: [] };
+
+        if (meta.query) {
+            const search_term = meta.query.trim();
+            (where_clause.AND as Prisma.FigureWhereInput[]).push({
+                OR: [
+                    { name: { contains: search_term, mode: 'insensitive' } },
+                    { gtin13: { contains: search_term } },
+                    { commentary: { contains: search_term, mode: 'insensitive' } },
+
+                    { editor: { name: { contains: search_term, mode: 'insensitive' } } },
+                    { characters: { some: { name: { contains: search_term, mode: 'insensitive' } } } }
+                ]
+            });
+        }
+
+        if (filters.editors?.length) {
+            (where_clause.AND as Prisma.FigureWhereInput[]).push({
+                editor_id: { in: filters.editors }
+            });
+        }
+
+        if (filters.series?.length) {
+            (where_clause.AND as Prisma.FigureWhereInput[]).push({
+                range_id: { in: filters.series }
+            });
+        }
+
+        if (filters.characters?.length) {
+            (where_clause.AND as Prisma.FigureWhereInput[]).push({
+                characters: { some: { id: { in: filters.characters } } }
+            });
+        }
+
+        if (filters.materials?.length) {
+            (where_clause.AND as Prisma.FigureWhereInput[]).push({
+                materials: { some: { id: { in: filters.materials } } }
+            });
+        }
+
+        //TODO IMPLEMENT PRICING LOGIC (using https://fxratesapi.com/)
+        if (filters.pricing?.length) {
+            const price_clause: Prisma.FigureWhereInput[] = [];
+
+            //ex: ["EUR:10:50:auto","USD:20:100:strict"]
+            for (const rule of filters.pricing) {
+                price_clause.push({
+                    listings: {
+                        some: {
+                            currency: rule.currency,
+                            price: {
+                                gte: rule.min,
+                                lte: rule.max
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (price_clause?.length) {
+                (where_clause.AND as Prisma.FigureWhereInput[]).push({ OR: price_clause });
+            }
+        }
+
+        //TODO SORTING LOGIC
+
+        const skip = (meta.page - 1) * meta.limit;
+
+        const [total_count, figures] = await pclient.$transaction([
+            pclient.figure.count({ where: where_clause }),
+            pclient.figure.findMany({
+                where: where_clause,
+                take: meta.limit,
+                skip: skip,
+                include: {
+                    editor: true,
+                    images: {
+                        orderBy: { priority: 'desc'},
+                        take: 1,
+                        include: {
+                            media: true
+                        }
+                    },
+                    listings: {
+                        select: { price: true, currency: true, url: true }
+                    }
+                }
+            })
+        ]);
+
+        return {
+            data: figures,
+            meta: {
+                total: total_count,
+                page: meta.page,
+                limit: meta.limit,
+                last_page: Math.ceil(total_count / meta.limit)
+            }
+        };
     }
 }

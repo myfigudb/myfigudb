@@ -6,6 +6,7 @@ import {createFigureSchema} from "../../interfaces/dtos/entities/figure_dto.js";
 import {FigureController} from "../../controllers/figureController.js";
 
 import {paramsIdSchema, paramsNameSchema} from "../../interfaces/dtos/params_dto.js";
+import {figureSearchSchema} from "../../interfaces/dtos/search_dto.js";
 //import {verifyToken} from "../../middlewares/auth.js";
 //import {verifyRole} from "../../middlewares/role.js";
 
@@ -16,6 +17,11 @@ router.post('/',
     //verifyToken,
     validate({body: createFigureSchema }),
     controller.create
+);
+
+router.get('/search',
+    validate({ query: figureSearchSchema }),
+    controller.search
 );
 
 router.delete('/:id',
