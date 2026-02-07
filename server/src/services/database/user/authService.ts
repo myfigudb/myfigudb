@@ -43,8 +43,8 @@ export class AuthService {
             return null;
         }
 
-        const payload = {
-            user_id: user.id,
+        const payload: Express.User = {
+            id: user.id,
             role: user.role,
         };
 
