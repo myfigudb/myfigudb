@@ -15,20 +15,20 @@ export class CommentController {
     /**
      * Create a Comment (New Thread)
      */
-    postComment: RequestHandler<{}, any, PostCommentDTO> = async (req, res) => {
+    postComment: RequestHandler<ParamsIdDTO, any, PostCommentDTO> = async (req, res) => {
         if (!req.user) {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
         try {
             const user_id = req.user.id;
-            const { figure_id, content } = req.body;
+            const { id } = req.params;
+            const { content } = req.body;
 
             const comment = await service.createComment({
                 content: content,
                 user_id: user_id,
-                figure_id: figure_id,
-                parent_id: figure_id
+                figure_id: id
             });
 
             return res.status(201).json(toCommentDTO(comment as CommentInput));
@@ -42,19 +42,20 @@ export class CommentController {
     /**
      * Reply to an existing Comment
      */
-    replyComment: RequestHandler<{}, any, ReplyCommentDTO> = async (req, res) => {
+    replyComment: RequestHandler<ParamsIdDTO, any, ReplyCommentDTO> = async (req, res) => {
         if (!req.user) {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
         try {
             const user_id = req.user.id;
-            const { figure_id, parent_id, content } = req.body;
+            const { id } = req.params;
+            const { parent_id, content } = req.body;
 
             const comment = await service.createComment({
                 content: content,
                 user_id: user_id,
-                figure_id: figure_id,
+                figure_id: id,
                 parent_id: parent_id
             });
 
@@ -72,7 +73,7 @@ export class CommentController {
     /**
      * Get comments
      */
-    findByFigureId: RequestHandler<ParamsIdDTO> = async (req, res) => {
+    findCommentsByFigureId: RequestHandler<ParamsIdDTO> = async (req, res) => {
         try {
             const { id } = req.params;
             const comments = await service.getCommentsByFigureId(id);
