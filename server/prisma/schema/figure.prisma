@@ -34,8 +34,9 @@ model FigureComment {
   user_id   String @db.Uuid
   figure_id String @db.Uuid
 
-  parent_id String @db.Uuid
+  parent_id String? @db.Uuid
 
+  content String
   figures Figure[]
 }
 
