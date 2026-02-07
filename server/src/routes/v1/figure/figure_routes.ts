@@ -1,17 +1,22 @@
 import { Router } from 'express';
 
-import { validate } from '../../middlewares/validate.js';
+import { validate } from '../../../middlewares/validate.js';
 
-import {createFigureSchema} from "../../interfaces/dtos/entities/figure_dto.js";
-import {FigureController} from "../../controllers/figureController.js";
+import {createFigureSchema} from "../../../interfaces/dtos/entities/figure_dto.js";
+import {FigureController} from "../../../controllers/figureController.js";
 
-import {paramsIdSchema, paramsNameSchema} from "../../interfaces/dtos/params_dto.js";
-import {figureSearchSchema} from "../../interfaces/dtos/search_dto.js";
+import {paramsIdSchema, paramsNameSchema} from "../../../interfaces/dtos/params_dto.js";
+import {figureSearchSchema} from "../../../interfaces/dtos/search_dto.js";
+import comment_routes from "./comment_routes.js";
 //import {verifyToken} from "../../middlewares/auth.js";
 //import {verifyRole} from "../../middlewares/role.js";
 
 const router = Router();
+
+router.use('/:id/comments', comment_routes)
+
 const controller = new FigureController();
+
 
 router.post('/',
     //verifyToken,
