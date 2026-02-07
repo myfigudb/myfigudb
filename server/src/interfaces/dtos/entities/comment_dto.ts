@@ -8,18 +8,16 @@ extendZodWithOpenApi(z);
  * DTO: Create a new Root Comment (New Thread)
  */
 export const postCommentSchema = z.object({
-    content: z.string().min(1).max(2000).trim(),
-    figure_id: z.uuid(),
+    content: z.string().min(1).max(2000).trim()
 });
 
 /**
  * DTO: Reply to an existing Comment
  */
 export const replyCommentSchema = z.object({
-    content: z.string().min(1).max(2000).trim(),
-    figure_id: z.uuid(),
     parent_id: z.uuid(),
-});
+    content: z.string().min(1).max(2000).trim()
+})
 
 /**
  * DTO: Update a Comment
@@ -37,9 +35,9 @@ export const commentResponseSchema = z.object({
     id: z.uuid(),
     content: z.string(),
     user_id: z.uuid(),
-    figure_id: z.uuid(),
-    parent_id: z.uuid(),
 
+    figure_id: z.uuid(),
+    parent_id: z.uuid().nullable(),
 });
 
 export type CommentResponse = z.infer<typeof commentResponseSchema>;
