@@ -10,13 +10,13 @@ model Tag {
 
   status TagStatus @default(PENDING)
 
-  created_by String @db.Uuid
-  creator    User   @relation(fields: [created_by], references: [id])
+  createdBy String @map("created_by") @db.Uuid
+  creator   User   @relation(fields: [createdBy], references: [id])
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  figure_tags FigureTag[]
+  figureTags FigureTag[]
 
   @@map("tag")
 }
@@ -30,19 +30,19 @@ enum FigureTagStatus {
 model FigureTag {
   id String @id @default(uuid()) @db.Uuid
 
-  figure_id String @db.Uuid
-  tag_id    String @db.Uuid
+  figureId String @map("figure_id") @db.Uuid
+  tagId    String @map("tag_id") @db.Uuid
 
   status FigureTagStatus @default(PENDING)
 
-  added_by String @db.Uuid
+  addedBy String @map("added_by") @db.Uuid
 
-  contributor User   @relation(fields: [added_by], references: [id])
-  figure      Figure @relation(fields: [figure_id], references: [id])
-  tag         Tag    @relation(fields: [tag_id], references: [id])
+  figure      Figure @relation(fields: [figureId], references: [id])
+  tag         Tag    @relation(fields: [tagId], references: [id])
+  contributor User   @relation(fields: [addedBy], references: [id])
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   votes FigureTagVote[]
 
@@ -50,18 +50,18 @@ model FigureTag {
 }
 
 model FigureTagVote {
-  figure_tag_id String @db.Uuid
-  voted_by      String @db.Uuid
+  figureTagId String @db.Uuid
+  votedBy     String @db.Uuid
 
   //    value = (-/+)Base + ln(voter.lvl + 1) * Multiplicateur
   // EX: value = 50 + ln(21) * 30 = 141
   weight Int @default(100)
 
-  figure_tag FigureTag @relation(fields: [figure_tag_id], references: [id])
-  voter      User      @relation(fields: [voted_by], references: [id])
+  figureTag FigureTag @relation(fields: [figureTagId], references: [id])
+  voter     User      @relation(fields: [votedBy], references: [id])
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@id([figure_tag_id, voted_by])
+  @@id([figureTagId, votedBy])
 }

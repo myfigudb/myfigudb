@@ -20,11 +20,11 @@ model Material {
 }
 
 model Range {
-  id        String @id @default(uuid()) @db.Uuid
-  name      String
-  editor_id String @db.Uuid
+  id       String @id @default(uuid()) @db.Uuid
+  name     String
+  editorId String @map("editor_id") @db.Uuid
 
-  editor Editor @relation(fields: [editor_id], references: [id])
+  editor Editor @relation(fields: [editorId], references: [id])
 
   figures Figure[]
 
@@ -42,11 +42,11 @@ model Editor {
 }
 
 model Character {
-  id         String @id @default(uuid()) @db.Uuid
-  name       String
-  license_id String @db.Uuid
+  id        String @id @default(uuid()) @db.Uuid
+  name      String
+  licenseId String @map("license_id") @db.Uuid
 
-  license License @relation(fields: [license_id], references: [id])
+  license License @relation(fields: [licenseId], references: [id])
 
   figures Figure[]
   medias  Media[]
@@ -60,8 +60,8 @@ model License {
 
   characters Character[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("license")
 }

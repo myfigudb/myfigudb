@@ -3,7 +3,7 @@ model User {
   slug  String @unique
   email String @unique
 
-  display_name String?
+  displayName String? @map("display_name")
 
   role String @default("default")
 
@@ -15,7 +15,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  votes       FigureTagVote[]
-  figure_tags FigureTag[]
-  tags        Tag[]
+  votes      FigureTagVote[]
+  figureTags FigureTag[]
+  tags       Tag[]
 }
