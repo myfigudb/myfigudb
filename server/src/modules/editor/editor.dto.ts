@@ -1,9 +1,9 @@
 import {z} from "zod";
 
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
-import {Editor, Media} from "../../../generated/prisma/client.js";
+import {Editor, Media} from "../../generated/prisma/client.js";
 
-import {CharacterInput} from "./character_dto.js";
+import {CharacterInput} from "../../interfaces/dtos/entities/character_dto.js";
 extendZodWithOpenApi(z)
 
 /**
@@ -12,8 +12,12 @@ extendZodWithOpenApi(z)
 export const createEditorSchema = z.object({
     name: z.string().min(1).trim(),
 })
-
 export type CreateEditorDTO = z.infer<typeof createEditorSchema>;
+
+
+
+export const updateEditorSchema = createEditorSchema.partial();
+export type UpdateEditorDTO = z.infer<typeof updateEditorSchema>;
 
 
 /**
@@ -25,7 +29,6 @@ export const editorResponseSchema = z.object({
     id: z.uuid(),
     name: z.string(),
 })
-
 export type EditorResponse = z.infer<typeof editorResponseSchema>;
 
 
