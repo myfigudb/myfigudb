@@ -3,7 +3,7 @@ import {z} from "zod";
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
 import {Range, Media} from "../../../generated/prisma/client.js";
 
-import {CharacterInput} from "./character_dto.js";
+import {CharacterInput} from "../character/character.dto.js";
 extendZodWithOpenApi(z)
 
 /**
@@ -11,10 +11,14 @@ extendZodWithOpenApi(z)
  */
 export const createRangeSchema = z.object({
     name: z.string().min(1).trim(),
+    editorId: z.uuid()
 })
 
 export type CreateRangeDTO = z.infer<typeof createRangeSchema>;
 
+
+export const updateRangeSchema = createRangeSchema.partial();
+export type UpdateRangeDTO = z.infer<typeof updateRangeSchema>;
 
 /**
  * OUTPUT DTO: Range response
