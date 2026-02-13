@@ -3,7 +3,7 @@ import {z} from "zod";
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
 import {License, Media} from "../../../generated/prisma/client.js";
 
-import {CharacterInput} from "./character_dto.js";
+import {CharacterInput} from "../character/character.dto.js";
 extendZodWithOpenApi(z)
 
 /**
@@ -15,6 +15,8 @@ export const createLicenseSchema = z.object({
 
 export type CreateLicenseDTO = z.infer<typeof createLicenseSchema>;
 
+export const updateLicenseSchema = createLicenseSchema.partial();
+export type UpdateLicenseDTO = z.infer<typeof updateLicenseSchema>;
 
 /**
  * OUTPUT DTO: License response
