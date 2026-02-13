@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
 
-import {figureResponseSchema, createFigureSchema} from "../../interfaces/dtos/entities/figure_dto.js";
+import {figureResponseSchema, createFigureSchema} from "./figure.dto.js";
 import {paramsIdSchema, paramsNameSchema} from "../../interfaces/dtos/params_dto.js";
 
 export const figureRegistry = new OpenAPIRegistry();
