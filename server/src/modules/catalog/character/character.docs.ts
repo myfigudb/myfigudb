@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 
-import {characterResponseSchema, createCharacterSchema} from "../../interfaces/dtos/entities/character_dto.js";
-import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
+import {characterResponseSchema, createCharacterSchema} from "./character.dto.js";
+import {paramsIdSchema} from "../../../interfaces/dtos/params_dto.js";
 import {z} from "zod";
 
 export const characterRegistry = new OpenAPIRegistry();
