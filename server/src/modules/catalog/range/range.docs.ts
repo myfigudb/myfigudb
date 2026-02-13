@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
-import {rangeResponseSchema, createRangeSchema} from "../../interfaces/dtos/entities/range_dto.js";
-import {paramsIdSchema, paramsNameSchema} from "../../interfaces/dtos/params_dto.js";
+import {rangeResponseSchema, createRangeSchema} from "./range.dto.js";
+import {paramsIdSchema, paramsNameSchema} from "../../../interfaces/dtos/params_dto.js";
 
 export const rangeRegistry = new OpenAPIRegistry();
 const errorResponseSchema = z.object({ message: z.string() });
