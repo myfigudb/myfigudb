@@ -3,7 +3,7 @@ import {z} from "zod";
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
 import {Material, Media} from "../../../generated/prisma/client.js";
 
-import {CharacterInput} from "./character_dto.js";
+import {CharacterInput} from "../character/character.dto.js";
 extendZodWithOpenApi(z)
 
 /**
@@ -12,9 +12,11 @@ extendZodWithOpenApi(z)
 export const createMaterialSchema = z.object({
     name: z.string().min(1).trim(),
 })
-
 export type CreateMaterialDTO = z.infer<typeof createMaterialSchema>;
 
+
+export const updateMaterialSchema = createMaterialSchema.partial();
+export type UpdateMaterialDTO = z.infer<typeof updateMaterialSchema>;
 
 /**
  * OUTPUT DTO: Material response

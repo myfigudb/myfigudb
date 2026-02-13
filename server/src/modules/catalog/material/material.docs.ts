@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
-import {materialResponseSchema, createMaterialSchema} from "../../interfaces/dtos/entities/material_dto.js";
-import {paramsNameSchema} from "../../interfaces/dtos/params_dto.js";
+import {materialResponseSchema, createMaterialSchema} from "./material.dto.js";
+import {paramsNameSchema} from "../../../interfaces/dtos/params_dto.js";
 
 export const materialRegistry = new OpenAPIRegistry();
 
