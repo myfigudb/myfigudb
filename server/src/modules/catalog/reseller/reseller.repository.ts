@@ -1,12 +1,12 @@
-import {pclient} from "../../../config/prisma.js";
-import {Reseller, Prisma} from "../../../generated/prisma/client.js";
+import { pclient } from "../../../config/prisma.js";
+import { Reseller, Prisma } from "../../../generated/prisma/client.js";
 
-export class ResellerService {
+export class ResellerRepository {
 
     /**
      * Retrieve a Reseller by its unique ID.
      */
-    async getResellerById(id: string): Promise<Reseller | null> {
+    async getById(id: string): Promise<Reseller | null> {
         return pclient.reseller.findUnique({
             where: { id }
         });
@@ -15,7 +15,7 @@ export class ResellerService {
     /**
      * Retrieve a Reseller by its unique Domain.
      */
-    async getResellerByDomain(domain: string): Promise<Reseller | null> {
+    async getByDomain(domain: string): Promise<Reseller | null> {
         return pclient.reseller.findUnique({
             where: { domain }
         });
@@ -24,7 +24,7 @@ export class ResellerService {
     /**
      * Retrieve a Reseller by its unique Name.
      */
-    async getResellerByName(name: string): Promise<Reseller | null> {
+    async getByName(name: string): Promise<Reseller | null> {
         return pclient.reseller.findUnique({
             where: { name }
         });
@@ -33,14 +33,14 @@ export class ResellerService {
     /**
      * Retrieve all Resellers.
      */
-    async getAllResellers(): Promise<Reseller[]> {
+    async getAll(): Promise<Reseller[]> {
         return pclient.reseller.findMany();
     }
 
     /**
      * Create a new Reseller.
      */
-    async createReseller(data: Prisma.ResellerCreateInput): Promise<Reseller> {
+    async create(data: Prisma.ResellerCreateInput): Promise<Reseller> {
         return pclient.reseller.create({
             data: data
         });
@@ -49,7 +49,7 @@ export class ResellerService {
     /**
      * Update an existing Reseller.
      */
-    async updateReseller(id: string, data: Prisma.ResellerUpdateInput): Promise<Reseller> {
+    async update(id: string, data: Prisma.ResellerUpdateInput): Promise<Reseller> {
         return pclient.reseller.update({
             where: { id },
             data: data
@@ -59,24 +59,9 @@ export class ResellerService {
     /**
      * Delete a Reseller.
      */
-    async deleteReseller(id: string): Promise<Reseller> {
+    async delete(id: string): Promise<Reseller> {
         return pclient.reseller.delete({
             where: { id }
-        });
-    }
-
-    /**
-     * Find Reseller with exact name matching.
-     * @param name
-     */
-    async getResellerByExactName(name: string): Promise<Reseller| null> {
-        return pclient.reseller.findFirst({
-            where: {
-                name: {
-                    equals: name.trim(),
-                    mode: 'insensitive'
-                }
-            }
         });
     }
 
@@ -90,7 +75,7 @@ export class ResellerService {
      * @param threshold     Trigger threshold (default: 0.3)
      * @param limit         Number of results to return (default: 5)
      */
-    async getResellerBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Reseller[]> {
+    async getBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Reseller[]> {
         return pclient.$queryRaw<Reseller[]>`
             SELECT *
             FROM "reseller"
