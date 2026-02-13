@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
-import {Figure, Media} from "../../../generated/prisma/client.js";
+import {Figure, Media} from "../../generated/prisma/client.js";
 
 extendZodWithOpenApi(z)
 
@@ -13,17 +13,19 @@ export const createFigureSchema = z.object({
     scale: z.string().optional(),
     height: z.number().optional(),
 
-    editor_id: z.uuid(),
-    range_id: z.uuid().optional(),
+    rangeId: z.uuid().optional(),
+    editorId: z.uuid(),
 
     gtin13: z.string().optional(),
 
-    release_date: z.coerce.date().optional(),
+    releaseDate: z.coerce.date().optional(),
     //color
     commentary: z.string().optional()
 })
-
 export type CreateFigureDTO = z.infer<typeof createFigureSchema>;
+
+export const updateFigureSchema = createFigureSchema.partial();
+export type UpdateFigureDTO = z.infer<typeof updateFigureSchema>;
 
 
 /**
@@ -32,9 +34,9 @@ export type CreateFigureDTO = z.infer<typeof createFigureSchema>;
 export const figureResponseSchema = z.object({
     id: z.uuid(),
     name: z.string(),
-    range_id: z.uuid().nullable(),
-    editor_id: z.uuid().nullable(),
-    scale: z.string().nullable().optional(),
+    rangeId: z.uuid().optional(),
+    editorId: z.uuid(),
+    scale: z.string().optional(),
 })
 
 export type FigureResponse = z.infer<typeof figureResponseSchema>;
@@ -48,8 +50,8 @@ export const toFigureDTO = (source: FigureInput): FigureResponse => {
     return {
         id: source.id,
         name: source.name,
-        range_id: source.range_id,
-        editor_id: source.editor_id,
-        scale: source.scale,
+        rangeId: source.rangeId ?? undefined,
+        editorId: source.editorId,
+        scale: source.scale ?? undefined,
     };
 };
