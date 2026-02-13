@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { validate } from '../../middlewares/validate.js';
+import { validate } from '../../core/middlewares/validate.js';
 
 import {createUserSchema} from "./user.dto.js";
 import {UserController} from "./user.controller.js";
