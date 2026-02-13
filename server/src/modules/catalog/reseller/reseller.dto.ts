@@ -3,7 +3,7 @@ import {z} from "zod";
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
 import {Reseller, Media} from "../../../generated/prisma/client.js";
 
-import {CharacterInput} from "./character_dto.js";
+import {CharacterInput} from "../character/character.dto.js";
 extendZodWithOpenApi(z)
 
 /**
@@ -12,8 +12,10 @@ extendZodWithOpenApi(z)
 export const createResellerSchema = z.object({
     name: z.string().min(1).trim(),
 })
-
 export type CreateResellerDTO = z.infer<typeof createResellerSchema>;
+
+export const updateResellerSchema = createResellerSchema.partial();
+export type UpdateResellerDTO = z.infer<typeof updateResellerSchema>;
 
 
 /**
