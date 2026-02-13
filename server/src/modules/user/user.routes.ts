@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { validate } from '../../middlewares/validate.js';
 
-import {createUserSchema} from "../../interfaces/dtos/entities/user_dto.js";
-import {UserController} from "../../controllers/userController.js";
+import {createUserSchema} from "./user.dto.js";
+import {UserController} from "./user.controller.js";
 import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
 
 const router = Router();
