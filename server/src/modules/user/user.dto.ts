@@ -1,10 +1,10 @@
 import {z} from "zod";
 
-import {User} from "../../../generated/prisma/client.js";
+import {User} from "../../generated/prisma/client.js";
 
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
-extendZodWithOpenApi(z)
 
+extendZodWithOpenApi(z)
 
 /**
  * INPUT DTO: create a new User
@@ -12,6 +12,8 @@ extendZodWithOpenApi(z)
 export const createUserSchema = z.object({
     slug: z.string().min(3, "Slug must be at least 3 characters long"),
     email: z.email("Invalid email address"),
+
+    displayName: z.string().optional(),
 
     password: z.string().min(8, "Password must be at least 8 characters long"),
 })
