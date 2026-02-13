@@ -56,6 +56,16 @@ export class EditorRepository {
         });
     }
 
+    /**
+     * Find Editor with similar names using trigram similarity (PostgreSQL pg_trgm).
+     *
+     * IMPORTANT : We use strict SQL here, so we must use the database table name ("editor"),
+     * defined in {@link ../../prisma/schema/catalog.prisma catalog.prisma} via @@map("editor")
+     *
+     * @param name          Name to search
+     * @param threshold     Trigger threshold (default: 0.3)
+     * @param limit         Number of results to return (default: 1)
+     */
     async findBySimilarityName(name: string, threshold: number = 0.3, limit: number = 1): Promise<Editor[]> {
         return pclient.$queryRaw<Editor[]>`
             SELECT *
