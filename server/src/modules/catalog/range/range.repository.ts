@@ -1,13 +1,13 @@
-import {pclient} from "../../../config/prisma.js";
-import {Range, Prisma, Material} from "../../../generated/prisma/client.js";
+import { pclient } from "../../../config/prisma.js";
+import { Range, Prisma } from "../../../generated/prisma/client.js";
 
-export class RangeService {
+export class RangeRepository {
 
     /**
      * Retrieve a Range by its unique ID.
      * Includes the Editor data.
      */
-    async getRangeById(id: string): Promise<Range | null> {
+    async getById(id: string): Promise<Range | null> {
         return pclient.range.findUnique({
             where: { id },
             include: {
@@ -20,7 +20,7 @@ export class RangeService {
      * Retrieve a Range by its Name.
      * Since name is not unique in schema, we take the first match.
      */
-    async getRangeByName(name: string): Promise<Range | null> {
+    async getByName(name: string): Promise<Range | null> {
         return pclient.range.findFirst({
             where: { name },
             include: {
@@ -32,16 +32,16 @@ export class RangeService {
     /**
      * Retrieve all Ranges linked to a specific Editor.
      */
-    async getRangesByEditorId(editorId: string): Promise<Range[]> {
+    async getByEditorId(editorId: string): Promise<Range[]> {
         return pclient.range.findMany({
-            where: { editor_id: editorId } // Attention au nom du champ dans ton model (editor_id)
+            where: { editorId: editorId }
         });
     }
 
     /**
      * Retrieve all Ranges.
      */
-    async getAllRanges(): Promise<Range[]> {
+    async getAll(): Promise<Range[]> {
         return pclient.range.findMany({
             include: {
                 editor: true
@@ -53,7 +53,7 @@ export class RangeService {
      * Create a new Range.
      * Data must include editor_id or connection to Editor.
      */
-    async createRange(data: Prisma.RangeUncheckedCreateInput): Promise<Range> {
+    async create(data: Prisma.RangeUncheckedCreateInput): Promise<Range> {
         return pclient.range.create({
             data: data
         });
@@ -62,7 +62,7 @@ export class RangeService {
     /**
      * Update an existing Range.
      */
-    async updateRange(id: string, data: Prisma.RangeUpdateInput): Promise<Range> {
+    async update(id: string, data: Prisma.RangeUpdateInput): Promise<Range> {
         return pclient.range.update({
             where: { id },
             data: data
@@ -72,24 +72,9 @@ export class RangeService {
     /**
      * Delete a Range.
      */
-    async deleteRange(id: string): Promise<Range> {
+    async delete(id: string): Promise<Range> {
         return pclient.range.delete({
             where: { id }
-        });
-    }
-
-    /**
-     * Find Range with exact name matching.
-     * @param name
-     */
-    async getRangeByExactName(name: string): Promise<Range| null> {
-        return pclient.range.findFirst({
-            where: {
-                name: {
-                    equals: name.trim(),
-                    mode: 'insensitive'
-                }
-            }
         });
     }
 
@@ -103,7 +88,7 @@ export class RangeService {
      * @param threshold     Trigger threshold (default: 0.3)
      * @param limit         Number of results to return (default: 5)
      */
-    async getRangeBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Range[]> {
+    async getBySimilarityName(name: string, threshold: number = 0.3, limit: number = 5): Promise<Range[]> {
         return pclient.$queryRaw<Range[]>`
             SELECT *
             FROM "range"
