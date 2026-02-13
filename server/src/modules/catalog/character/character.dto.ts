@@ -11,10 +11,12 @@ extendZodWithOpenApi(z)
  */
 export const createCharacterSchema = z.object({
     name: z.string().min(1).trim(),
-    license_id: z.uuid(),
+    licenseId: z.uuid(),
 })
-
 export type CreateCharacterDTO = z.infer<typeof createCharacterSchema>;
+
+export const updateCharacterSchema = createCharacterSchema.partial();
+export type UpdateCharacterDTO = z.infer<typeof updateCharacterSchema>;
 
 /**
  * OUTPUT DTO: Character response
@@ -25,7 +27,7 @@ export type CreateCharacterDTO = z.infer<typeof createCharacterSchema>;
 export const characterResponseSchema = z.object({
     id: z.uuid(),
     name: z.string(),
-    license_id: z.uuid(),
+    licenseId: z.uuid(),
     medias: z.array(z.url())
 })
 
@@ -41,7 +43,7 @@ export const toCharacterDTO = (source: CharacterInput): CharacterResponse => {
     return {
         id: source.id,
         name: source.name,
-        license_id: source.license_id,
+        licenseId: source.licenseId,
 
         medias: source.medias?.map((media) =>
             StorageService.getPublicUrl(media.hash, media.extension, media.folder)
