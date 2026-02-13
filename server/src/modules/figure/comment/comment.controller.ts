@@ -1,12 +1,12 @@
 import { RequestHandler } from 'express';
-import { CommentService } from "../services/database/figure/commentService.js";
+import { CommentService } from "./comment.service.js";
 import {
     PostCommentDTO,
     ReplyCommentDTO,
     toCommentDTO,
     CommentInput
-} from "../interfaces/dtos/entities/comment_dto.js";
-import { ParamsIdDTO } from "../interfaces/dtos/params_dto.js";
+} from "./comment.dto.js";
+import { ParamsIdDTO } from "../../../interfaces/dtos/params_dto.js";
 
 const service = new CommentService();
 
@@ -21,15 +21,10 @@ export class CommentController {
         }
 
         try {
-            const user_id = req.user.id;
-            const { id } = req.params;
-            const { content } = req.body;
+            const userId = req.user.id;
+            const figureId = req.params.id;
 
-            const comment = await service.createComment({
-                content: content,
-                user_id: user_id,
-                figure_id: id
-            });
+            const comment = await service.postComment(req.body, figureId, userId);
 
             return res.status(201).json(toCommentDTO(comment as CommentInput));
 
@@ -48,24 +43,15 @@ export class CommentController {
         }
 
         try {
-            const user_id = req.user.id;
-            const { id } = req.params;
-            const { parent_id, content } = req.body;
+            const userId = req.user.id;
+            const figureId = req.params.id;
 
-            const comment = await service.createComment({
-                content: content,
-                user_id: user_id,
-                figure_id: id,
-                parent_id: parent_id
-            });
+            const comment = await service.replyComment(req.body, figureId, userId);
 
             return res.status(201).json(toCommentDTO(comment as CommentInput));
 
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error creating reply:", error);
-            if (error) {
-                return res.status(404).json({ message: "Parent comment or Figure not found" });
-            }
             return res.status(500).json({ message: "Internal server error" });
         }
     }
@@ -75,8 +61,9 @@ export class CommentController {
      */
     findCommentsByFigureId: RequestHandler<ParamsIdDTO> = async (req, res) => {
         try {
-            const { id } = req.params;
-            const comments = await service.getCommentsByFigureId(id);
+            const figureId = req.params.id;
+            const comments = await service.getCommentsByFigureId(figureId);
+
             return res.status(200).json(comments.map(c => toCommentDTO(c as CommentInput)));
         } catch (error) {
             console.error("Error fetching comments:", error);
@@ -93,10 +80,15 @@ export class CommentController {
         }
 
         try {
-            const { id } = req.params;
-            await service.deleteComment(id);
+            const userId = req.user.id;
+            const commentId = req.params.id;
+
+            await service.deleteComment(commentId, userId);
             return res.status(204).send();
-        } catch (error) {
+        } catch (error: any) {
+            if (error.code === 'P2025') {
+                return res.status(404).json({ message: "Comment not found" });
+            }
             console.error("Error deleting comment:", error);
             return res.status(500).json({ message: "Internal server error" });
         }
