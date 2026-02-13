@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { VoteTagDTO } from "./tag.dto.js";
-import { ParamsIdDTO } from "../../../interfaces/dtos/params_dto.js";
+import { ParamsIdDTO } from "../../interfaces/dtos/params_dto.js";
 import {TagSurveyService} from "./tag-survey.service.js";
 
 const service = new TagSurveyService();
