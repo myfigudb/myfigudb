@@ -1,6 +1,6 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 
-import {userResponseSchema, createUserSchema} from "../../interfaces/dtos/entities/user_dto.js";
+import {userResponseSchema, createUserSchema} from "./user.dto.js";
 import {paramsIdSchema,} from "../../interfaces/dtos/params_dto.js";
 import {z} from "zod";
 
