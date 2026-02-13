@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
 import {editorResponseSchema, createEditorSchema} from "./editor.dto.js";
-import {paramsIdSchema} from "../../interfaces/dtos/params_dto.js";
+import {paramsIdSchema} from "../../../interfaces/dtos/params_dto.js";
 
 export const editorRegistry = new OpenAPIRegistry();
 const errorResponseSchema = z.object({ message: z.string() });
