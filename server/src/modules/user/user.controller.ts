@@ -1,7 +1,7 @@
 import {Request, RequestHandler, Response} from 'express';
-import {UserService} from "../services/database/user/userService.js";
-import {CreateUserDTO} from "../interfaces/dtos/entities/user_dto.js";
-import {ParamsIdDTO} from "../interfaces/dtos/params_dto.js";
+import {UserService} from "./user.service.js";
+import {CreateUserDTO} from "./user.dto.js";
+import {ParamsIdDTO} from "../../interfaces/dtos/params_dto.js";
 
 const service = new UserService();
 
@@ -10,6 +10,7 @@ export class UserController {
     create: RequestHandler<{}, any, CreateUserDTO> = async (req, res) => {
         try {
             const character = await service.createUser(req.body);
+
             return res.status(201).json(character);
         } catch (error) {
             console.error("Error creating characters:", error);
@@ -22,6 +23,7 @@ export class UserController {
             const { id } = req.params;
 
             const user = await service.getUserById(id);
+
 
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
