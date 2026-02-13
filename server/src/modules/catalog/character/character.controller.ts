@@ -1,14 +1,14 @@
 import {Request, RequestHandler, Response} from 'express';
-import {CharacterService} from "../services/database/figure/characterService.js";
-import {StorageService} from "../services/storageService.js";
-import {MediaService} from "../services/database/mediaService.js";
+import {CharacterService} from "./character.service.js";
+import {StorageService} from "../../../services/storageService.js";
+import {MediaService} from "../../../services/database/mediaService.js";
 
-import {ParamsIdDTO} from "../interfaces/dtos/params_dto.js";
+import {ParamsIdDTO} from "../../../interfaces/dtos/params_dto.js";
 import {
     CharacterInput,
     CreateCharacterDTO,
     toCharacterDTO
-} from "../interfaces/dtos/entities/character_dto.js";
+} from "./character.dto.js";
 
 const service = new CharacterService();
 
@@ -20,6 +20,7 @@ export class CharacterController {
     create: RequestHandler<{}, any, CreateCharacterDTO> = async (req, res) => {
         try {
             const character = await service.createCharacter(req.body);
+
             return res.status(201).json(toCharacterDTO(character as CharacterInput));
         } catch (error) {
             console.error("Error creating characters:", error);
