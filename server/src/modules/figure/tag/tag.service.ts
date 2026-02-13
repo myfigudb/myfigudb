@@ -1,7 +1,7 @@
 import { TagRepository } from "./tag.repository.js";
 
 import {CreateTagDTO, UpdateTagDTO} from "./tag.dto.js";
-import {Tag} from "../../generated/prisma/client.js";
+import {Tag} from "../../../generated/prisma/client.js";
 
 
 export class TagService {

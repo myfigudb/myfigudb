@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { TagService } from "./tag.service.js";
 import { CreateTagDTO, UpdateTagDTO } from "./tag.dto.js";
-import { ParamsIdDTO } from "../../interfaces/dtos/params_dto.js";
+import { ParamsIdDTO } from "../../../interfaces/dtos/params_dto.js";
 
 const tagService = new TagService();
 
