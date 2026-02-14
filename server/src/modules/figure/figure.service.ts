@@ -1,7 +1,7 @@
 import { FigureRepository } from "./figure.repository.js";
 import { CreateFigureDTO, UpdateFigureDTO } from "./figure.dto.js";
 import {Figure, Prisma} from "../../generated/prisma/client.js";
-import {FigureSearchDTO} from "../../interfaces/dtos/search_dto.js";
+import {FigureSearchDTO} from "../../core/dtos/search_dto.js";
 
 export class FigureService {
 

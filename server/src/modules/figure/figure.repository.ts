@@ -1,4 +1,4 @@
-import { pclient } from "../../config/prisma.js";
+import { pclient } from "../../core/config/prisma.js";
 import {Figure, Prisma} from "../../generated/prisma/client.js";
 
 

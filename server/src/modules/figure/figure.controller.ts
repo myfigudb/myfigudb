@@ -2,13 +2,13 @@ import {Request, RequestHandler, Response} from 'express';
 import {FigureService} from "./figure.service.js";
 
 
-import {ParamsIdDTO, ParamsNameDTO} from "../../interfaces/dtos/params_dto.js";
+import {ParamsIdDTO, ParamsNameDTO} from "../../core/dtos/params_dto.js";
 import {
     FigureInput,
     CreateFigureDTO,
     toFigureDTO
 } from "./figure.dto.js";
-import {FigureSearchDTO, FigureSearchQuery, figureSearchSchema} from "../../interfaces/dtos/search_dto.js";
+import {FigureSearchDTO, FigureSearchQuery, figureSearchSchema} from "../../core/dtos/search_dto.js";
 
 const service = new FigureService();
 
