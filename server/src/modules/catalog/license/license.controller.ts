@@ -2,7 +2,7 @@ import {Request, RequestHandler, Response} from 'express';
 import {LicenseService} from "./license.service.js";
 import {tr} from "zod/v4/locales/index.js";
 import {CreateLicenseDTO, createLicenseSchema} from "./license.dto.js";
-import {ParamsIdDTO, ParamsNameDTO} from "../../../interfaces/dtos/params_dto.js";
+import {ParamsIdDTO, ParamsNameDTO} from "../../../core/dtos/params_dto.js";
 
 const service = new LicenseService();
 

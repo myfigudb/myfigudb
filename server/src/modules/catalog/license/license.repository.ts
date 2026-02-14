@@ -1,4 +1,4 @@
-import { pclient } from "../../../config/prisma.js";
+import { pclient } from "../../../core/config/prisma.js";
 import { License, Prisma } from "../../../generated/prisma/client.js";
 
 export class LicenseRepository {
