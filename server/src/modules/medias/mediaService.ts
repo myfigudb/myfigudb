@@ -1,15 +1,15 @@
-import {pclient} from "../../config/prisma.js";
+import {pclient} from "../../core/config/prisma.js";
 
 export class MediaService {
 
-    async ensureMediaExists(hash: string, mime_type: string, folder: string) {
+    async ensureMediaExists(hash: string, mimeType: string, folder: string) {
         return pclient.media.upsert({
             where: { hash },
             create: {
                 hash,
-                mime_type,
+                mimeType,
                 folder,
-                extension: mime_type.split('/')[1]
+                extension: mimeType.split('/')[1]
             },
             update: {}
         });
