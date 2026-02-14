@@ -1,4 +1,4 @@
-import {pclient} from "../config/prisma.js";
+import {pclient} from "../core/config/prisma.js";
 
 
 async function main() {
