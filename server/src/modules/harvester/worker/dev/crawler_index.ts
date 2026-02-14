@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import {connectRedis} from "../../config/redis.js";
+import {connectRedis} from "../../../../core/config/redis.js";
 import {ChibiAkihabaraCrawler} from "../crawling/providers/chibiAkihabaraCrawler.js";
 
 async function main() {
