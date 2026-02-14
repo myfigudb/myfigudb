@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
 import {resellerResponseSchema, createResellerSchema} from "./reseller.dto.js";
-import {paramsIdSchema, paramsNameSchema} from "../../../interfaces/dtos/params_dto.js";
+import {paramsIdSchema, paramsNameSchema} from "../../../core/dtos/params_dto.js";
 
 export const resellerRegistry = new OpenAPIRegistry();
 const errorResponseSchema = z.object({ message: z.string() });
