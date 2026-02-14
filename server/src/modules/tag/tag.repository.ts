@@ -1,4 +1,4 @@
-import { pclient } from "../../config/prisma.js";
+import { pclient } from "../../core/config/prisma.js";
 import { Tag, FigureTag, FigureTagVote, Prisma } from "../../generated/prisma/client.js";
 
 export class TagRepository {
