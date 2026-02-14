@@ -48,6 +48,10 @@ export class UserService {
         return this.repo.getBySlug(cleanSlug);
     }
 
+    async getUserByEmail(email: string): Promise<User | null> {
+        return this.repo.getByEmail(email);
+    }
+
     /**
      * Get just the experience points of a user.
      */
