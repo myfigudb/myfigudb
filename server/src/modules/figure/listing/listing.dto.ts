@@ -1,9 +1,8 @@
 import {z} from "zod";
 
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
-import {FigureListing, Media} from "../../../generated/prisma/client.js";
+import {FigureListing} from "../../../generated/prisma/client.js";
 
-import {CharacterInput} from "./character_dto.js";
 extendZodWithOpenApi(z)
 
 /**
@@ -15,6 +14,9 @@ export const createListingSchema = z.object({
 
 export type CreateListingDTO = z.infer<typeof createListingSchema>;
 
+
+export const updateListingSchema = createListingSchema.partial();
+export type UpdateListingDTO = z.infer<typeof updateListingSchema>;
 
 /**
  * OUTPUT DTO: Listing response
