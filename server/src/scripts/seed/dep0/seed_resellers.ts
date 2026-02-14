@@ -1,5 +1,5 @@
 import {faker} from "@faker-js/faker";
-import {ResellerService} from "../../../services/database/figure/resellerService.js";
+import {ResellerService} from "../../../modules/catalog/reseller/reseller.service.js";
 
 const service = new ResellerService();
 

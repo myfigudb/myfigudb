@@ -1,7 +1,7 @@
 import {faker} from "@faker-js/faker";
-import {pclient} from "../../../config/prisma.js";
+import {pclient} from "../../../core/config/prisma.js";
 
-import {CharacterService} from "../../../services/database/figure/characterService.js";
+import {CharacterService} from "../../../modules/catalog/character/character.service.js";
 
 
 const service = new CharacterService();

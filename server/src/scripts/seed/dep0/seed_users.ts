@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import {UserService} from "../../../services/database/user/userService.js";
+import {UserService} from "../../../modules/user/user.service.js";
 
 const service = new UserService();
 

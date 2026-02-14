@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import {LicenseService} from "../../../services/database/figure/licenseService.js";
+import {LicenseService} from "../../../modules/catalog/license/license.service.js";
 
 const service = new LicenseService();
 

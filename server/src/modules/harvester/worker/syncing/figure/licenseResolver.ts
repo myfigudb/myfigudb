@@ -1,7 +1,7 @@
-import { License } from '../../../generated/prisma/client.js';
+import { License } from '../../../../../generated/prisma/client.js';
 import { EntityResolver } from '../entityResolver.js';
-import { LicenseService } from "../../../services/database/figure/licenseService.js";
-import { LicenseScrapDTO } from "../../../interfaces/dtos/scrap_dto.js";
+import { LicenseService } from "../../../../catalog/license/license.service.js";
+import { LicenseScrapDTO } from "../../../../../core/dtos/scrap_dto.js";
 
 export class LicenseResolver implements EntityResolver<License, LicenseScrapDTO> {
 

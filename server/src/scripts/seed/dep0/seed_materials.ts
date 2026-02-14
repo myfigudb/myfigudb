@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import {MaterialService} from "../../../services/database/figure/materialService.js";
+import {MaterialService} from "../../../modules/catalog/material/material.service.js";
 
 const service = new MaterialService();
 

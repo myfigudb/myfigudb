@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-import {FigureService} from "../../../services/database/figure/figureService.js";
-import {ListingService} from "../../../services/database/figure/listingService.js";
-import {pclient} from "../../../config/prisma.js";
+import {FigureService} from "../../../modules/figure/figure.service.js";
+import {ListingService} from "../../../modules/figure/listing/listing.service.js";
+import {pclient} from "../../../core/config/prisma.js";
 
 const figure_service = new FigureService();
 const listing_service = new ListingService();

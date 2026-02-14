@@ -1,6 +1,6 @@
-import {pclient} from "../../../config/prisma.js";
+import {pclient} from "../../../core/config/prisma.js";
 import {faker} from "@faker-js/faker";
-import {TagService} from "../../../services/database/figure/tagService.js";
+import TagService from "../../../modules/tag/tag.service.js";
 
 const service = new TagService();
 

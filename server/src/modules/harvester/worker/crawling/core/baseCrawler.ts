@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {QueueService} from "../../../services/database/queueService.js";
+import {QueueService} from "../../../queueService.js";
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 

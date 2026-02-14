@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import {EditorService} from "../../../services/database/figure/editorService.js";
+import {EditorService} from "../../../modules/catalog/editor/editor.service.js";
 
 const service = new EditorService();
 
