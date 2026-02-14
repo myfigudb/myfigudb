@@ -2,7 +2,7 @@ import app from './app.js';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 
-import {generateOpenApiDocs} from "./docs/openapi.js";
+import {generateOpenApiDocs} from "./core/config/openapi.js";
 import {initBloomFilter} from "./scripts/init_bloom_filter.js";
 
 
