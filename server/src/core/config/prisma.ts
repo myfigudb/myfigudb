@@ -1,8 +1,8 @@
-import { PrismaClient } from '../generated/prisma/client.js';
+import { PrismaClient } from '../../generated/prisma/client.js';
 import { PrismaPg } from '@prisma/adapter-pg';
 import pg from 'pg';
 import 'dotenv/config';
-import {StorageService} from "../services/storageService.js";
+import {StorageService} from "../../modules/medias/storageService.js";
 
 const { Pool } = pg;
 

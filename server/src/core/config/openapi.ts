@@ -1,14 +1,14 @@
 import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 
-import { characterRegistry } from './domains/character_docs.js';
-import {licenseRegistry} from "./domains/license_docs.js";
-import {userRegistry} from "./domains/user_docs.js";
-import {figureRegistry} from "./domains/figure_docs.js";
-import {materialRegistry} from "./domains/material_doc.js";
-import {listingRegistry} from "./domains/listing_doc.js";
-import {editorRegistry} from "./domains/editor_doc.js";
-import {resellerRegistry} from "./domains/reseller_doc.js";
-import {rangeRegistry} from "./domains/range_doc.js";
+import { characterRegistry } from '../../modules/catalog/character/character.docs.js';
+import {licenseRegistry} from "../../modules/catalog/license/license.docs.js";
+import {userRegistry} from "../../modules/user/user.docs.js";
+import {figureRegistry} from "../../modules/figure/figure.docs.js";
+import {materialRegistry} from "../../modules/catalog/material/material.docs.js";
+import {listingRegistry} from "../../modules/figure/listing/listing.doc.js";
+import {editorRegistry} from "../../modules/catalog/editor/editor.docs.js";
+import {resellerRegistry} from "../../modules/catalog/reseller/reseller.docs.js";
+import {rangeRegistry} from "../../modules/catalog/range/range.docs.js";
 
 export const generateOpenApiDocs = () => {
     const generator = new OpenApiGeneratorV3([
