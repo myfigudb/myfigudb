@@ -8,7 +8,7 @@ import {
     updateCommentSchema
 } from "./comment.dto.js";
 
-import { paramsIdSchema } from "../../../interfaces/dtos/params_dto.js";
+import { paramsIdSchema } from "../../../core/dtos/params_dto.js";
 import { CommentController } from "./comment.controller.js";
 
 const router = Router({ mergeParams: true });
