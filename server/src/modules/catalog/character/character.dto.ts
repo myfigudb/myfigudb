@@ -1,7 +1,7 @@
 import {z} from "zod";
 
 import {Character, Media} from "../../../generated/prisma/client.js";
-import {StorageService} from "../../../services/storageService.js";
+import {StorageService} from "../../medias/storageService.js";
 
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
 extendZodWithOpenApi(z)

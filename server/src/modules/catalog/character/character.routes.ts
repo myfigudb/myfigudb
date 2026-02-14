@@ -6,10 +6,10 @@ import { upload } from '../../../core/middlewares/upload.js';
 import {createCharacterSchema} from "./character.dto.js";
 import {CharacterController} from "./character.controller.js";
 
-import {paramsIdSchema} from "../../../interfaces/dtos/params_dto.js";
+import {paramsIdSchema} from "../../../core/dtos/params_dto.js";
 import {verifyToken} from "../../../core/middlewares/auth.js";
 import {verifyRole} from "../../../core/middlewares/role.js";
-import {createLicenseSchema} from "../../../interfaces/dtos/entities/license_dto.js";
+import {createLicenseSchema} from "../license/license.dto.js";
 
 const router = Router();
 const controller = new CharacterController();
