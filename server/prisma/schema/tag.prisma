@@ -1,0 +1,67 @@
+enum TagStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+model Tag {
+  id    String @id @default(uuid()) @db.Uuid
+  label String @unique
+
+  status TagStatus @default(PENDING)
+
+  createdBy String @map("created_by") @db.Uuid
+  creator   User   @relation(fields: [createdBy], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  figureTags FigureTag[]
+
+  @@map("tag")
+}
+
+enum FigureTagStatus {
+  PENDING // Score < 200
+  CONFIRMED // Score >= 200
+  DEFINITIVE // Score >= 1000
+}
+
+model FigureTag {
+  id String @id @default(uuid()) @db.Uuid
+
+  figureId String @map("figure_id") @db.Uuid
+  tagId    String @map("tag_id") @db.Uuid
+
+  status FigureTagStatus @default(PENDING)
+
+  addedBy String @map("added_by") @db.Uuid
+
+  figure      Figure @relation(fields: [figureId], references: [id])
+  tag         Tag    @relation(fields: [tagId], references: [id])
+  contributor User   @relation(fields: [addedBy], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  votes FigureTagVote[]
+
+  @@map("figure_tag")
+}
+
+model FigureTagVote {
+  figureTagId String @db.Uuid
+  votedBy     String @db.Uuid
+
+  //    value = (-/+)Base + ln(voter.lvl + 1) * Multiplicateur
+  // EX: value = 50 + ln(21) * 30 = 141
+  weight Int @default(100)
+
+  figureTag FigureTag @relation(fields: [figureTagId], references: [id])
+  voter     User      @relation(fields: [votedBy], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@id([figureTagId, votedBy])
+}

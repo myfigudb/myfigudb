@@ -1,0 +1,30 @@
+model Media {
+  hash      String @id
+  mimeType  String @map("mime_type")
+  extension String
+  folder    String @default("uploads")
+
+  originUrl String? @map("origin_url")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  characters Character[]
+
+  figureMedias FigureMedia[]
+
+  @@map("media")
+}
+
+model FigureMedia {
+  figureId  String @map("figure_id") @db.Uuid
+  mediaHash String @map("media_hash")
+
+  priority Int @default(0)
+
+  figure Figure @relation(fields: [figureId], references: [id])
+  media  Media  @relation(fields: [mediaHash], references: [hash])
+
+  @@id([figureId, mediaHash])
+  @@map("figure_media")
+}

@@ -1,0 +1,67 @@
+model Reseller {
+  id     String @id @default(uuid()) @db.Uuid
+  name   String @unique
+  domain String @unique
+  url    String
+
+  listings FigureListing[]
+
+  @@map("reseller")
+}
+
+model Material {
+  id   String  @id @default(uuid()) @db.Uuid
+  name String  @unique
+  url  String?
+
+  figures Figure[]
+
+  @@map("material")
+}
+
+model Range {
+  id       String @id @default(uuid()) @db.Uuid
+  name     String
+  editorId String @map("editor_id") @db.Uuid
+
+  editor Editor @relation(fields: [editorId], references: [id])
+
+  figures Figure[]
+
+  @@map("range")
+}
+
+model Editor {
+  id   String @id @default(uuid()) @db.Uuid
+  name String
+
+  ranges  Range[]
+  figures Figure[]
+
+  @@map("editor")
+}
+
+model Character {
+  id        String @id @default(uuid()) @db.Uuid
+  name      String
+  licenseId String @map("license_id") @db.Uuid
+
+  license License @relation(fields: [licenseId], references: [id])
+
+  figures Figure[]
+  medias  Media[]
+
+  @@map("character")
+}
+
+model License {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique
+
+  characters Character[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("license")
+}

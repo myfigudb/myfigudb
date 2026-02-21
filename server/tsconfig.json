@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "rootDir": ".",
+    "outDir": "./dist",
+
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+
+    "typeRoots": ["./node_modules/@types",
+      "./src/core/types"
+    ],
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@db/*": ["prisma/generated/client/*"],
+
+      "@core/*": ["src/core/*"],
+
+      "@auth/*": ["src/modules/auth/*"],
+      "@figure/*": ["src/modules/figure/*"],
+      "@harvester/*": ["src/modules/harvester/*"],
+      "@medias/*": ["src/modules/medias/*"],
+      "@tag/*": ["src/modules/tag/*"],
+      "@user/*": ["src/modules/user/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "prisma/generated/client/**/*"
+  ],
+  "exclude": ["node_modules"]
+}
