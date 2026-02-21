@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { validate } from '../../../core/middlewares/validate.js';
-import { verifyToken } from "../../../core/middlewares/auth.js";
+import { validate } from '@core/middlewares/validate.js';
+import { verifyToken } from "@core/middlewares/auth.js";
 
 import {
     postCommentSchema,
@@ -8,7 +8,7 @@ import {
     updateCommentSchema
 } from "./comment.dto.js";
 
-import { paramsIdSchema } from "../../../core/dtos/params_dto.js";
+import { paramsIdSchema } from "@core/dtos/params_dto.js";
 import { CommentController } from "./comment.controller.js";
 
 const router = Router({ mergeParams: true });

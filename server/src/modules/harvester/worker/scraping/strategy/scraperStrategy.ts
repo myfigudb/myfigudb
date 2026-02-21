@@ -1,4 +1,4 @@
-import {FigurePageScrapDTO, FigureScrapDTO} from "../../../../../core/dtos/scrap_dto.js";
+import {FigurePageScrapDTO, FigureScrapDTO} from "../../@core/dtos/scrap_dto.js";
 
 
 export interface ScraperStrategy {

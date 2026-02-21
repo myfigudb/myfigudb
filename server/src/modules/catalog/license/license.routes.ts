@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { validate } from '../../../core/middlewares/validate.js';
+import { validate } from '@core/middlewares/validate.js';
 
 import {LicenseController} from "./license.controller.js";
 import {createLicenseSchema} from './license.dto.js';
 
-import {paramsIdSchema, paramsNameSchema} from "../../../core/dtos/params_dto.js";
+import {paramsIdSchema, paramsNameSchema} from "@core/dtos/params_dto.js";
 
 const router = Router();
 const controller = new LicenseController();

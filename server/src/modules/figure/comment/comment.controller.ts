@@ -6,7 +6,7 @@ import {
     toCommentDTO,
     CommentInput
 } from "./comment.dto.js";
-import { ParamsIdDTO } from "../../../core/dtos/params_dto.js";
+import { ParamsIdDTO } from "@core/dtos/params_dto.js";
 
 const service = new CommentService();
 

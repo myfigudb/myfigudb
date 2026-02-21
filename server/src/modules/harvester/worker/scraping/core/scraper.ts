@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {ScraperFactory} from "./scraperFactory.js";
-import {FigurePageScrapDTO} from "../../../../../core/dtos/scrap_dto.js";
+import {FigurePageScrapDTO} from "../../@core/dtos/scrap_dto.js";
 
 /**
  * Transform encapsulated HTML in JSON into HTML

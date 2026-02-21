@@ -1,4 +1,4 @@
-import { pclient } from '../core/config/prisma.js';
+import { pclient } from '@core/config/prisma.js';
 
 import {seedUsers} from "./seed/dep0/seed_users.js";
 import {seedLicenses} from "./seed/dep0/seed_licenses.js";

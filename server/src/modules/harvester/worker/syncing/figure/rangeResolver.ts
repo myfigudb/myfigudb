@@ -1,7 +1,7 @@
 import { Range } from '../../../../../generated/prisma/client.js';
 import { EntityResolver } from '../entityResolver.js';
 import { RangeService } from "../../../../catalog/range/range.service.js";
-import { RangeScrapDTO } from "../../../../../core/dtos/scrap_dto.js";
+import { RangeScrapDTO } from "../../@core/dtos/scrap_dto.js";
 
 import { EditorResolver } from "./editorResolver.js";
 

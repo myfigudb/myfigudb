@@ -2,7 +2,7 @@ import {FigureResolver} from "./figure/figureResolver.js";
 import {ListingService} from "../../../figure/listing/listing.service.js";
 
 import {ResellerService} from "../../../catalog/reseller/reseller.service.js";
-import {FigurePageScrapDTO} from "../../../../core/dtos/scrap_dto.js";
+import {FigurePageScrapDTO} from "../@core/dtos/scrap_dto.js";
 
 export class Sync {
 

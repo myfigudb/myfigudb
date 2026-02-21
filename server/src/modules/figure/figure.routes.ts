@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import { validate } from '../../core/middlewares/validate.js';
+import { validate } from '@core/middlewares/validate.js';
 
 import {createFigureSchema} from "./figure.dto.js";
 import {FigureController} from "./figure.controller.js";
 
-import {paramsIdSchema, paramsNameSchema} from "../../core/dtos/params_dto.js";
-import {figureSearchSchema} from "../../core/dtos/search_dto.js";
+import {paramsIdSchema, paramsNameSchema} from "@core/dtos/params_dto.js";
+import {figureSearchSchema} from "@core/dtos/search_dto.js";
 
 import comment_routes from "./comment/comment.routes.js";
 

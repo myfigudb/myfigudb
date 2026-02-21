@@ -1,14 +1,14 @@
 import { Router } from 'express';
 
-import { validate } from '../../../core/middlewares/validate.js';
-import { upload } from '../../../core/middlewares/upload.js';
+import { validate } from '@core/middlewares/validate.js';
+import { upload } from '@core/middlewares/upload.js';
 
 import {createCharacterSchema} from "./character.dto.js";
 import {CharacterController} from "./character.controller.js";
 
-import {paramsIdSchema} from "../../../core/dtos/params_dto.js";
-import {verifyToken} from "../../../core/middlewares/auth.js";
-import {verifyRole} from "../../../core/middlewares/role.js";
+import {paramsIdSchema} from "@core/dtos/params_dto.js";
+import {verifyToken} from "@core/middlewares/auth.js";
+import {verifyRole} from "@core/middlewares/role.js";
 import {createLicenseSchema} from "../license/license.dto.js";
 
 const router = Router();

@@ -1,4 +1,4 @@
-import { pclient } from "../../../core/config/prisma.js";
+import { pclient } from "@core/config/prisma.js";
 import { FigureComment, Prisma } from "../../../generated/prisma/client.js";
 
 export class CommentRepository {

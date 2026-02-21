@@ -1,4 +1,4 @@
-import {closeRedis, connectRedis, redis_client} from "../core/config/redis.js";
+import {closeRedis, connectRedis, redis_client} from "@core/config/redis.js";
 
 export const initBloomFilter = async () => {
     const filter_key = process.env.REDIS_BF_CRAWL_KEY || 'crawling:visited';

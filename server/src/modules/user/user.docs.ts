@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 
 import {userResponseSchema, createUserSchema} from "./user.dto.js";
-import {paramsIdSchema,} from "../../core/dtos/params_dto.js";
+import {paramsIdSchema,} from "@core/dtos/params_dto.js";
 import {z} from "zod";
 
 export const userRegistry = new OpenAPIRegistry();

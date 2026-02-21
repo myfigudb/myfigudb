@@ -5,7 +5,7 @@ import { ScraperStrategy } from "./scraperStrategy.js";
 import {
     FigurePageScrapSchema,
     FigurePageScrapDTO
-} from "../../../../../core/dtos/scrap_dto.js";
+} from "../../@core/dtos/scrap_dto.js";
 
 export class ChibiStrategy implements ScraperStrategy {
 

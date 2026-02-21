@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
 
-import {paramsIdSchema, paramsNameSchema} from "../../../core/dtos/params_dto.js";
+import {paramsIdSchema, paramsNameSchema} from "@core/dtos/params_dto.js";
 import {createLicenseSchema, licenseResponseSchema} from "./license.dto.js";
 
 export const licenseRegistry = new OpenAPIRegistry();

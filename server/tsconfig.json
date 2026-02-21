@@ -19,7 +19,19 @@
     ],
 
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["src/core/*"],
+
+      "@auth/*": ["src/modules/auth/*"],
+      "@figure/*": ["src/modules/figure/*"],
+      "@harvester/*": ["src/modules/harvester/*"],
+      "@medias/*": ["src/modules/medias/*"],
+      "@tag/*": ["src/modules/tag/*"],
+      "@user/*": ["src/modules/tag/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

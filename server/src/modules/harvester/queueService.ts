@@ -1,5 +1,5 @@
-import {redis_client} from "../../core/config/redis.js";
-import {pclient} from "../../core/config/prisma.js";
+import {redis_client} from "@core/config/redis.js";
+import {pclient} from "@core/config/prisma.js";
 
 export class QueueService {
 

@@ -1,6 +1,6 @@
 import { Figure } from '../../../../../generated/prisma/client.js';
 import {EntityResolver} from "../entityResolver.js";
-import {FigureScrapDTO} from "../../../../../core/dtos/scrap_dto.js";
+import {FigureScrapDTO} from "../../@core/dtos/scrap_dto.js";
 import {FigureService} from "../../../../figure/figure.service.js";
 import {MaterialResolver} from "./materialResolver.js";
 import {CharacterResolver} from "./characterResolver.js";

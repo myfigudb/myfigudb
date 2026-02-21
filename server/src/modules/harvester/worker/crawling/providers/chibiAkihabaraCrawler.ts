@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import {BaseCrawler} from "../core/baseCrawler.js";
+import {BaseCrawler} from "@core/baseCrawler.js";
 // @ts-ignore
 // import * as fs from "node:fs";
 

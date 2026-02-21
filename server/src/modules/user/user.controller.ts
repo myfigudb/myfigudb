@@ -1,7 +1,7 @@
 import {Request, RequestHandler, Response} from 'express';
 import {UserService} from "./user.service.js";
 import {CreateUserDTO} from "./user.dto.js";
-import {ParamsIdDTO} from "../../core/dtos/params_dto.js";
+import {ParamsIdDTO} from "@core/dtos/params_dto.js";
 
 const service = new UserService();
 

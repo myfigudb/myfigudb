@@ -1,9 +1,9 @@
 import {Request, RequestHandler, Response} from 'express';
 import {CharacterService} from "./character.service.js";
-import {StorageService} from "../../medias/storageService.js";
-import {MediaService} from "../../medias/mediaService.js";
+import {StorageService} from "@medias/storageService.js";
+import {MediaService} from "@medias/mediaService.js";
 
-import {ParamsIdDTO} from "../../../core/dtos/params_dto.js";
+import {ParamsIdDTO} from "@core/dtos/params_dto.js";
 import {
     CharacterInput,
     CreateCharacterDTO,

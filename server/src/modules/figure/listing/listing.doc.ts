@@ -1,7 +1,7 @@
 import {OpenAPIRegistry} from '@asteasolutions/zod-to-openapi';
 import {z} from "zod";
 import {listingResponseSchema, createListingSchema} from "./listing.dto.js";
-import {paramsIdSchema} from "../../../core/dtos/params_dto.js";
+import {paramsIdSchema} from "@core/dtos/params_dto.js";
 
 export const listingRegistry = new OpenAPIRegistry();
 
