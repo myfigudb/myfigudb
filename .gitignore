@@ -5,3 +5,4 @@
 /pg_data/
 /server/package-lock.json
 /redis_data/
+/server/prisma/generated/
