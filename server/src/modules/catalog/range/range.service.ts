@@ -1,6 +1,6 @@
 import { RangeRepository } from "./range.repository.js";
 import { CreateRangeDTO, UpdateRangeDTO } from "./range.dto.js";
-import { Range } from "../../../generated/prisma/client.js";
+import { Range } from "@db/client.js";
 
 export class RangeService {
 

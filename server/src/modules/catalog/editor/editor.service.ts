@@ -1,5 +1,5 @@
 import {EditorRepository} from "./editor.repository.js";
-import {Editor} from "../../../generated/prisma/client.js";
+import {Editor} from "@db/client.js";
 
 import {CreateEditorDTO, UpdateEditorDTO} from "./editor.dto.js";
 

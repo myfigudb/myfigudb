@@ -1,5 +1,5 @@
 import { pclient } from "@core/config/prisma.js";
-import { Material, Prisma } from "../../../generated/prisma/client.js";
+import { Material, Prisma } from "@db/client.js";
 
 export class MaterialRepository {
 

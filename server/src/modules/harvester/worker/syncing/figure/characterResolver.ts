@@ -1,4 +1,4 @@
-import { Character } from '../../../../../generated/prisma/client.js';
+import { Character } from '@db/client.js';
 import { EntityResolver } from '../entityResolver.js';
 import { CharacterService } from "../../../../catalog/character/character.service.js";
 import { CharacterScrapDTO } from "../../@core/dtos/scrap_dto.js";

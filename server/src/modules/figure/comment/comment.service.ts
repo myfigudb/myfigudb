@@ -1,6 +1,6 @@
 import { CommentRepository } from "./comment.repository.js";
 import { PostCommentDTO, ReplyCommentDTO, UpdateCommentDTO } from "./comment.dto.js";
-import { FigureComment } from "../../../generated/prisma/client.js";
+import { FigureComment } from "@db/client.js";
 
 export class CommentService {
 

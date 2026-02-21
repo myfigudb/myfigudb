@@ -1,4 +1,4 @@
-import { License } from '../../../../../generated/prisma/client.js';
+import { License } from '@db/client.js';
 import { EntityResolver } from '../entityResolver.js';
 import { LicenseService } from "../../../../catalog/license/license.service.js";
 import { LicenseScrapDTO } from "../../@core/dtos/scrap_dto.js";

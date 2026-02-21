@@ -1,8 +1,8 @@
 import {TagRepository} from "./tag.repository.js";
-import {UserRepository} from "../user/user.repository.js";
+import {UserRepository} from "@user/user.repository.js";
 
 import {VoteTagDTO} from "./tag.dto.js";
-import {FigureTag, FigureTagVote} from "../../generated/prisma/client.js";
+import {FigureTag, FigureTagVote} from "@db/client.js";
 
 import jwt from "jsonwebtoken";
 

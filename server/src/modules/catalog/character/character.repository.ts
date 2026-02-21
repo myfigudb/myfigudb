@@ -1,5 +1,5 @@
 import { pclient } from "@core/config/prisma.js";
-import { Character, Prisma } from "../../../generated/prisma/client.js";
+import { Character, Prisma } from "@db/client.js";
 
 export class CharacterRepository {
 

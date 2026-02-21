@@ -1,4 +1,4 @@
-import { Editor } from '../../../../../generated/prisma/client.js';
+import { Editor } from '@db/client.js';
 import { EntityResolver } from '../entityResolver.js';
 import { EditorService } from "../../../../catalog/editor/editor.service.js";
 import { EditorScrapDTO } from "../../@core/dtos/scrap_dto.js";

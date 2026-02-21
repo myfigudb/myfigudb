@@ -1,5 +1,5 @@
 import { pclient } from "@core/config/prisma.js";
-import { Range, Prisma } from "../../../generated/prisma/client.js";
+import { Range, Prisma } from "@db/client.js";
 
 export class RangeRepository {
 

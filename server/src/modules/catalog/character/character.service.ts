@@ -1,6 +1,6 @@
 import { CharacterRepository } from "./character.repository.js";
 import {CreateCharacterDTO, CharacterInput, UpdateCharacterDTO} from "./character.dto.js";
-import {Character, Prisma} from "../../../generated/prisma/client.js";
+import {Character, Prisma} from "@db/client.js";
 
 export class CharacterService {
 

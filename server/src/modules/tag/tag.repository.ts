@@ -1,5 +1,5 @@
 import { pclient } from "@core/config/prisma.js";
-import { Tag, FigureTag, FigureTagVote, Prisma } from "../../generated/prisma/client.js";
+import { Tag, FigureTag, FigureTagVote, Prisma } from "@db/client.js";
 
 export class TagRepository {
     async findById(id: string): Promise<Tag | null> {

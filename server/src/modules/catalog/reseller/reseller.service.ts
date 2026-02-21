@@ -1,6 +1,6 @@
 import { ResellerRepository } from "./reseller.repository.js";
 import { CreateResellerDTO, UpdateResellerDTO } from "./reseller.dto.js";
-import { Reseller } from "../../../generated/prisma/client.js";
+import { Reseller } from "@db/client.js";
 
 export class ResellerService {
 

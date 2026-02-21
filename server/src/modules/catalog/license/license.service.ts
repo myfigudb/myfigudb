@@ -1,7 +1,7 @@
 import { LicenseRepository } from "./license.repository.js";
 import { CreateLicenseDTO, UpdateLicenseDTO } from "./license.dto.js";
 
-import { License } from "../../../generated/prisma/client.js";
+import { License } from "@db/client.js";
 
 export class LicenseService {
 

@@ -1,5 +1,5 @@
 import { pclient } from "@core/config/prisma.js";
-import { Reseller, Prisma } from "../../../generated/prisma/client.js";
+import { Reseller, Prisma } from "@db/client.js";
 
 export class ResellerRepository {
 

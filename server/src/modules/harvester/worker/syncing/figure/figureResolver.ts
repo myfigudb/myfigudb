@@ -1,4 +1,4 @@
-import { Figure } from '../../../../../generated/prisma/client.js';
+import { Figure } from '@db/client.js';
 import {EntityResolver} from "../entityResolver.js";
 import {FigureScrapDTO} from "../../@core/dtos/scrap_dto.js";
 import {FigureService} from "../../../../figure/figure.service.js";

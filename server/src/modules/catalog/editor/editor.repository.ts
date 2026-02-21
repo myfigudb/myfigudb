@@ -1,5 +1,5 @@
 import {pclient} from "@core/config/prisma.js";
-import {Editor, Prisma} from "../../../generated/prisma/client.js";
+import {Editor, Prisma} from "@db/client.js";
 
 export class EditorRepository {
 

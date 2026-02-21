@@ -1,4 +1,4 @@
-import {Material} from '../../../../../generated/prisma/client.js';
+import {Material} from '@db/client.js';
 import {EntityResolver} from '../entityResolver.js';
 import {MaterialScrapDTO} from "../../@core/dtos/scrap_dto.js";
 import {MaterialService} from "../../../../catalog/material/material.service.js";

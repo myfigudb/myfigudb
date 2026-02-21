@@ -1,5 +1,5 @@
 import { MaterialRepository } from "./material.repository.js";
-import { Material } from "../../../generated/prisma/client.js";
+import { Material } from "@db/client.js";
 import {CreateMaterialDTO, UpdateMaterialDTO} from "./material.dto.js";
 
 export class MaterialService {

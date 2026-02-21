@@ -4,7 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
 
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
 
     "esModuleInterop": true,
@@ -23,6 +23,8 @@
 
     "baseUrl": ".",
     "paths": {
+      "@db/*": ["prisma/generated/client/*"],
+
       "@core/*": ["src/core/*"],
 
       "@auth/*": ["src/modules/auth/*"],
@@ -30,9 +32,12 @@
       "@harvester/*": ["src/modules/harvester/*"],
       "@medias/*": ["src/modules/medias/*"],
       "@tag/*": ["src/modules/tag/*"],
-      "@user/*": ["src/modules/tag/*"]
+      "@user/*": ["src/modules/user/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*",
+    "prisma/generated/client/**/*"
+  ],
   "exclude": ["node_modules"]
 }

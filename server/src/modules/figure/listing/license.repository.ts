@@ -1,5 +1,5 @@
 import { pclient } from "@core/config/prisma.js";
-import { FigureListing, Prisma } from "../../../generated/prisma/client.js";
+import { FigureListing, Prisma } from "@db/client.js";
 
 export class ListingRepository {
 

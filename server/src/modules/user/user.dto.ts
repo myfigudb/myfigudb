@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-import {User} from "../../generated/prisma/client.js";
+import {User} from "@db/client.js";
 
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
 

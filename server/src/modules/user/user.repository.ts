@@ -1,4 +1,4 @@
-import {Prisma, User} from "../../generated/prisma/client.js";
+import {Prisma, User} from "@db/client.js";
 import {pclient} from "@core/config/prisma.js";
 
 export class UserRepository {

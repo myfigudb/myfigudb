@@ -1,4 +1,4 @@
-import { FigureListing } from "../../../generated/prisma/client.js";
+import { FigureListing } from "@db/client.js";
 import {ListingRepository} from "./license.repository.js";
 import {CreateListingDTO, UpdateListingDTO} from "./listing.dto.js";
 

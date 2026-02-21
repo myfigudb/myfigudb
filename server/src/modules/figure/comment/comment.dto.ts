@@ -1,6 +1,6 @@
 import {z} from "zod";
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
-import {FigureComment} from "../../../generated/prisma/client.js";
+import {FigureComment} from "@db/client.js";
 
 extendZodWithOpenApi(z);
 

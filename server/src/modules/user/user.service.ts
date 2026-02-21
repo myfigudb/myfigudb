@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { UserRepository } from "./user.repository.js";
-import { User } from "../../generated/prisma/client.js";
+import { User } from "@db/client.js";
 import {CreateUserDTO} from "./user.dto.js";
 
 export class UserService {

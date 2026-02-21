@@ -1,7 +1,7 @@
 import {z} from "zod";
 
 import {extendZodWithOpenApi} from "@asteasolutions/zod-to-openapi";
-import {Material, Media} from "../../../generated/prisma/client.js";
+import {Material, Media} from "@db/client.js";
 
 import {CharacterInput} from "../character/character.dto.js";
 extendZodWithOpenApi(z)
