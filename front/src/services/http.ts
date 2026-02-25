@@ -5,7 +5,7 @@ export type ApiError = {
     details?: unknown
 }
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000' // TODO : Rendre ça plus propre
+const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api/v1' // TODO: make this configurable
 
 async function parseJsonSafe(res: Response) {
     const text = await res.text()
@@ -50,3 +50,5 @@ export async function apiRequest<T>(
 
     return data as T
 }
+
+

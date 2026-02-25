@@ -1,4 +1,5 @@
 import { useUserStore } from '../store/userStore'
+import FigureFetcher from '../components/FigureFetcher'
 
 export default function Home() {
     const user = useUserStore((s) => s.user)
@@ -11,7 +12,7 @@ export default function Home() {
 
             {user ? (
                 <>
-                    <p>Connecté : {user.name}</p>
+                    <p>Connecte : {user.name}</p>
                     <button onClick={logout}>Logout</button>
                 </>
             ) : (
@@ -19,6 +20,8 @@ export default function Home() {
                     Login fake
                 </button>
             )}
+
+            <FigureFetcher />
         </div>
     )
 }
