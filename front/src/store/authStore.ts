@@ -27,8 +27,8 @@ export const useAuthStore = create<AuthState>()(
       login: async (payload) => {
         set({ isLoading: true, error: null })
         try {
-          const { token, user } = await authService.login(payload)
-          set({ token, user, isLoading: false })
+          const { access_token } = await authService.login(payload)
+          set({ token: access_token, user: null, isLoading: false })
         } catch (e) {
           const err = e as ApiError
           set({ error: err.message, isLoading: false })
