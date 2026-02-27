@@ -16,7 +16,7 @@ export default function Home() {
 
             <section className="relative flex min-h-screen flex-col items-center justify-center px-6">
                 <img
-                    src="/assets/logos/full_name/myfigudb_logo_lg_dark.svg"
+                    src="/assets/logos/full_name/myfigudb_logo_lg_dark_pink.svg"
                     alt="myfigudb"
                     className="h-auto w-full max-w-xs sm:max-w-md"
                 />
