@@ -17,6 +17,7 @@ export const userService = {
         return apiRequest<RegisterResponse>('/users', {
             method: 'POST',
             body: JSON.stringify(payload),
+            auth: false,
         })
     },
 }
