@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 
 const loginBackgroundSrc = '/assets/background/LoginBackground.png'
@@ -47,6 +47,8 @@ const fieldClassName =
     'h-12 w-full rounded-xl border border-[#c8c8c8] bg-[#fffbfc] px-4 text-base font-light text-[#0a0a11] outline-none placeholder:text-[#9f9f9f] focus:border-[#ed5f7f] focus:ring-2 focus:ring-[#ed5f7f]/15'
 
 export default function Login() {
+    const navigate = useNavigate()
+    const location = useLocation()
     const login = useAuthStore((s) => s.login)
     const fetchMe = useAuthStore((s) => s.fetchMe)
     const logout = useAuthStore((s) => s.logout)
@@ -59,12 +61,26 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const redirectTo =
+        (
+            location.state as
+                | {
+                      from?: string
+                  }
+                | undefined
+        )?.from ?? '/figures'
 
     useEffect(() => {
         if (token && !user) {
             void fetchMe()
         }
     }, [fetchMe, token, user])
+
+    useEffect(() => {
+        if (token && user) {
+            navigate(redirectTo, { replace: true })
+        }
+    }, [navigate, redirectTo, token, user])
 
     const canSubmit = identifier.trim().length > 0 && password.length > 0
 
@@ -80,8 +96,10 @@ export default function Login() {
 
         try {
             await login(payload)
+            await fetchMe()
+            navigate(redirectTo, { replace: true })
         } catch {
-            // Error state is already stored in authStore.
+            return
         }
     }
 
