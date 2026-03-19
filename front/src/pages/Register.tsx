@@ -4,24 +4,24 @@ import type { ApiError } from '../services/http'
 import { userService } from '../services/user.service'
 
 const registerBackgroundSrc = '/assets/background/RegisterBackground.png'
-const logoSrc = '/assets/logos/icon/myfigudb_logo_sm_dark_pink.svg'
+const logoSrc = '/assets/icons/figudb/myfigudb_logo_sm_dark_pink.svg'
 
 const socialButtons = [
     {
         label: 'Register with Google',
-        iconSrc: '/assets/social/GoogleIcon.svg',
+        iconSrc: '/assets/icons/social/colored/GoogleIcon.svg',
     },
     {
         label: 'Register with Apple',
-        iconSrc: '/assets/social/AppleIcon.svg',
+        iconSrc: '/assets/icons/social/colored/AppleIcon.svg',
     },
     {
         label: 'Register with GitHub',
-        iconSrc: '/assets/social/GitHubIcon.svg',
+        iconSrc: '/assets/icons/social/colored/GitHubIcon.svg',
     },
     {
         label: 'Register with Discord',
-        iconSrc: '/assets/social/DiscordIcon.svg',
+        iconSrc: '/assets/icons/social/colored/DiscordIcon.svg',
     },
 ] as const
 

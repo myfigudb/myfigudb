@@ -3,24 +3,24 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 
 const loginBackgroundSrc = '/assets/background/LoginBackground.png'
-const logoSrc = '/assets/logos/icon/myfigudb_logo_sm_dark_pink.svg'
+const logoSrc = '/assets/icons/figudb/myfigudb_logo_sm_dark_pink.svg'
 
 const socialButtons = [
     {
         label: 'Login with Google',
-        iconSrc: '/assets/social/GoogleIcon.svg',
+        iconSrc: '/assets/icons/social/colored/GoogleIcon.svg',
     },
     {
         label: 'Login with Apple',
-        iconSrc: '/assets/social/AppleIcon.svg',
+        iconSrc: '/assets/icons/social/colored/AppleIcon.svg',
     },
     {
         label: 'Login with GitHub',
-        iconSrc: '/assets/social/GitHubIcon.svg',
+        iconSrc: '/assets/icons/social/colored/GitHubIcon.svg',
     },
     {
         label: 'Login with Discord',
-        iconSrc: '/assets/social/DiscordIcon.svg',
+        iconSrc: '/assets/icons/social/colored/DiscordIcon.svg',
     },
 ] as const
 
