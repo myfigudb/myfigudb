@@ -7,15 +7,11 @@ export type LoginResponse = { access_token: string }
 
 type JwtPayload = {
     user_id: string
-    role?: string
-    exp?: number
-    iat?: number
 }
 
-type UserResponse = {
+type AuthUserResponse = {
     id: string
     slug: string
-    email: string
 }
 
 function decodeJwtPayload(token: string): JwtPayload {
@@ -39,13 +35,15 @@ export const authService = {
         return apiRequest<LoginResponse>('/auth', {
             method: 'POST',
             body: JSON.stringify(payload),
+            auth: false,
         })
     },
 
     me(token: string) {
         const payload = decodeJwtPayload(token)
-        return apiRequest<UserResponse>(`/users/${payload.user_id}`, {
+        return apiRequest<AuthUserResponse>(`/users/${payload.user_id}`, {
             method: 'GET',
+            token,
         }).then((user) => ({ id: user.id, name: user.slug }))
     },
 }
